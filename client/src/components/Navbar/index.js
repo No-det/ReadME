@@ -4,14 +4,14 @@ import Search from "../../assets/search.svg";
 
 const Navbar = ({ children }) => {
   return (
-    <div className="navWrapper">
+    <>
       <div className="navMain">
         <div className="logoContainer">
           <img src={Logo} alt="logo" />
           <h2>readMe</h2>
         </div>
         <div className="actionContainer">
-          <select>
+          <select placeholder="Select genre">
             <option key="one">One</option>
             <option key="one">One</option>
             <option key="one">One</option>
@@ -23,7 +23,7 @@ const Navbar = ({ children }) => {
         </div>
       </div>
       <div className="navContent">{children}</div>
-    </div>
+    </>
   );
 };
 

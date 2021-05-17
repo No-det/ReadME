@@ -5,14 +5,16 @@ import Trades from "./pages/Trades";
 
 const App = () => {
   return (
+    // <div className="container">
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Landing} />
         <Navbar>
+          <Route exact path="/" component={Landing} />
           <Route exact path="/trades" component={Trades} />
         </Navbar>
       </Switch>
     </BrowserRouter>
+    // </div>
   );
 };
 
