@@ -1,3 +1,5 @@
+import { signInWithGoogle } from "../../firebase/firebase";
+
 import landingImage from "../../assets/landing.png";
 
 import "./index.scss";
@@ -7,7 +9,10 @@ const Landing = () => {
     <div className="landing__container">
       <main>
         <h1>A great eye for good books.</h1>
-        <a href="#">Get Started For Free</a>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+        <a href="#" onClick={signInWithGoogle}>
+          Get Started For Free
+        </a>
       </main>
       <div className="imageWrapper">
         <img src={landingImage} alt="Landing Illustration" />

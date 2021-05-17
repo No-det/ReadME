@@ -5,7 +5,6 @@ import Trades from "./pages/Trades";
 
 const App = () => {
   return (
-    // <div className="container">
     <BrowserRouter>
       <Switch>
         <Navbar>
@@ -14,7 +13,6 @@ const App = () => {
         </Navbar>
       </Switch>
     </BrowserRouter>
-    // </div>
   );
 };
 

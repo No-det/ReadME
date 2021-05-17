@@ -11,7 +11,8 @@ const Navbar = ({ children }) => {
           <h2>readMe</h2>
         </div>
         <div className="actionContainer">
-          <select placeholder="Select genre">
+          <select>
+            <option default>Select Genre</option>
             <option key="one">One</option>
             <option key="one">One</option>
             <option key="one">One</option>
