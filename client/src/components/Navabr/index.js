@@ -1,7 +1,7 @@
 import "./index.scss";
 
 const Navbar = () => {
-    return <div></div>
-}
+  return <div></div>;
+};
 
 export default Navbar;

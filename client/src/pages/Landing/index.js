@@ -1,7 +1,8 @@
 const Landing = () => {
   return (
-    <div>
-      <h2>This is the landing component</h2>
+    <div className="landing__container">
+      <h1>A great eye for good books.</h1>
+      <a href="#">Get Started For Free</a>
     </div>
   );
 };
