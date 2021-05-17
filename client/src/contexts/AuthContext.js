@@ -10,6 +10,7 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
+      console.log(user);
       setUser(user);
       setLoading(false);
     });

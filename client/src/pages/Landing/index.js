@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { Redirect } from "react-router-dom";
+
+import { AuthContext } from "../../contexts/AuthContext";
 import { signInWithGoogle } from "../../firebase/firebase";
 
 import landingImage from "../../assets/landing.png";
@@ -5,6 +9,12 @@ import landingImage from "../../assets/landing.png";
 import "./index.scss";
 
 const Landing = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
+
+  if (user) return <Redirect to="/reviews" />;
+
   return (
     <div className="landing__container">
       <main>

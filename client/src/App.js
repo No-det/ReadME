@@ -1,5 +1,8 @@
 import { useContext } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Switch } from "react-router-dom";
+
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
@@ -20,9 +23,10 @@ const App = () => {
           <Switch>
             <Navbar>
               <div className="container">
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/trades" component={Trades} />
-                <Route exact path="/profile" component={Profile} />
+                <PublicRoute exact path="/" component={Landing} />
+                <PrivateRoute path="/reviews" component={Trades} />
+                <PrivateRoute path="/trades" component={Trades} />
+                <PrivateRoute path="/profile" component={Profile} />
               </div>
             </Navbar>
           </Switch>
