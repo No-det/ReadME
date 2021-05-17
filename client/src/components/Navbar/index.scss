@@ -1,0 +1,25 @@
+.navWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #102037;
+  //   padding: 20px;
+  overflow-x: hidden;
+  .navMain {
+    position: fixed;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logoContainer {
+      display: flex;
+    }
+
+    .actionContainer {
+      display: flex;
+    }
+  }
+
+  .navContent {
+  }
+}
