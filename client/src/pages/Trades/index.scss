@@ -1,6 +1,7 @@
 .trade-post {
     padding: 30px;
-    width: 500px;
+    margin: 10px 0;
+    width: 440px;
     height: fit-content;
     background: #2C3D55;
     color: white;
@@ -23,7 +24,10 @@
             }
             a {
                 color: white;
-                font-size: 18px;
+                font-size: 17px;
+            }
+            span {
+                padding-left: 10px;
             }
         }
         button {
@@ -33,12 +37,12 @@
             width: 115px;
             color: white;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 17px;
         }
     }
     .body {
         padding: 30px 0 20px 0;
-        font-size: 18px;
+        font-size: 17px;
         line-height: 22px;
         box-sizing: border-box;
     }
@@ -52,5 +56,21 @@
 }
 
 .trades {
-    padding: 0 100px;
+    padding-top: 12vh;
+    .trades-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 30px;
+        h2 {
+            font-weight: 600;
+            font-size: 36px;
+        }
+        button {
+            background: #5B55C2;
+            color: white;
+            width: 200px;
+            font-size: 17px;  
+        }
+    }
 }

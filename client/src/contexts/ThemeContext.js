@@ -3,13 +3,10 @@ import { createContext, useState } from "react";
 export const ThemeContext = createContext();
 
 const ThemeProvider = (props) => {
-    const [theme, setTheme] = useState("dark");
-    const isDarkTheme = () => {
-        return theme === "dark";
-    }
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme, isDarkTheme }}>
+        <ThemeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
             {props.children}
         </ThemeContext.Provider>
     );
