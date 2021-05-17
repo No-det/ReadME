@@ -4,12 +4,14 @@ import Trades from "./pages/Trades";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/trades" component={Trades} />
-      </Switch>
-    </BrowserRouter>
+    <div className="container">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/trades" component={Trades} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 };
 
