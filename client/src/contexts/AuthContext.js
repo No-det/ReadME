@@ -18,7 +18,7 @@ const AuthProvider = (props) => {
 
   return (
     <AuthContext.Provider value={{ user }}>
-      {loading ? "Loading..." : props.children}
+      {!loading && props.children}
     </AuthContext.Provider>
   );
 };
