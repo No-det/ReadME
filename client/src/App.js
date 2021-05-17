@@ -1,17 +1,24 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import Trades from "./pages/Trades";
+import AuthProvider from "./context/AuthContext";
 
 const App = () => {
   return (
-    <div className="container">
+    <AuthProvider>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/trades" component={Trades} />
+          <Navbar>
+            <div className="container">
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/trades" component={Trades} />
+            </div>
+          </Navbar>
         </Switch>
       </BrowserRouter>
-    </div>
+    </AuthProvider>
   );
 };
 
