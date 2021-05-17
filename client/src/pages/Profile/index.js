@@ -22,21 +22,18 @@ const Profile = () => {
         </div>
         <div className="profileImage">
           <img
-            src="https://images.pexels.com/photos/1680172/pexels-photo-1680172.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500#"
+            src="https://pbs.twimg.com/profile_images/725321660484583424/ArQ4fM3k_400x400.jpg"
             alt=""
           />
         </div>
       </div>
       <div className="profileContentWrapper">
         <div className="profileContent">
-          <h2>John Doe</h2>
-          <small>john@doe.com</small>
+          <h2>Betram Gilfoyle</h2>
+          <small>gilfoyle@piedpiper.com</small>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-            perferendis exercitationem hic laboriosam eligendi iusto corrupti,
-            sapiente ut recusandae at quas ipsa tempore qui quasi esse neque
-            consectetur, non,cipit, soluta numquam autem animi quos
-            reprehenderit ea porro at!
+            Master coder. Satanist. Senior Systems Architect @PiedPiper I hate
+            Dinesh
           </p>
         </div>
       </div>
