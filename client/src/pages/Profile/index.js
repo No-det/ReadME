@@ -6,7 +6,7 @@ const Profile = () => {
       <div className="profileTop">
         <div className="profileBanner">
           <img
-            src="https://images.pexels.com/photos/869258/pexels-photo-869258.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+            src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1355&q=80"
             alt="Banner"
           />
           <div className="followContainer">
