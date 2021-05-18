@@ -5,6 +5,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 
 import Navbar from "./components/Navbar";
+import Reviews from "./pages/Reviews"
 import Landing from "./pages/Landing";
 import Trades from "./pages/Trades";
 import Profile from "./pages/Profile";
@@ -24,7 +25,7 @@ const App = () => {
             <Navbar>
               <div className="container">
                 <PublicRoute exact path="/" component={Landing} />
-                <PrivateRoute path="/reviews" component={Trades} />
+                <PrivateRoute path="/reviews" component={Reviews} />
                 <PrivateRoute path="/trades" component={Trades} />
                 <PrivateRoute path="/profile" component={Profile} />
               </div>
