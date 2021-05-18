@@ -44,6 +44,54 @@ code {
   padding-top: 10vh;
 }
 
+.ant-drawer-content,
+.ant-drawer-header {
+  .ant-form-item .ant-input-textarea-show-count::after {
+    color: white;
+  }
+  .anticon-close {
+    color: white;
+  }
+  border: none;
+  background-color: #102037 !important;
+  .ant-drawer-title {
+    color: white !important;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .ant-form-item-label > label {
+    color: white !important;
+  }
+  .ant-input {
+    background-color: #102037;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    box-shadow: inset 1.4px 1.4px 9.6px #0b1727,
+      inset -1.4px -1.4px 9.6px #152947;
+    &:hover {
+      background-color: #102037;
+      color: white;
+    }
+  }
+  .ant-btn {
+    background-color: #102037;
+    outline: none;
+    box-shadow: 4.8px 4.8px 9.6px #0b1727, -4.8px -4.8px 9.6px #152947;
+    border: none;
+    margin: 10px 0;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:active {
+      box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
+        inset -4.8px -4.8px 9.6px #152947;
+    }
+  }
+}
+
 @media screen and (min-width: 1399px) {
   .container {
     max-width: 1400px;
