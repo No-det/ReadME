@@ -23,6 +23,7 @@ const Trades = () => {
   const addTrade = async (values) => {
     setSubmitting(true);
     const payload = {
+      uid: user?.uid,
       displayName: user?.displayName,
       photoURL: user?.photoURL,
       email: user?.email,
