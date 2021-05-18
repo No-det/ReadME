@@ -1,0 +1,32 @@
+.floatingNavbarContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 500px;
+  width: 100%;
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #102037;
+  box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
+  .navLink {
+    color: white;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    &:active {
+      background: #102037;
+      box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
+        inset -2.4px -2.4px 9.6px #152947;
+    }
+  }
+  .selected {
+    transition: all 0.5s ease-in-out;
+    background: #102037;
+    box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
+      inset -2.4px -2.4px 9.6px #152947;
+  }
+}

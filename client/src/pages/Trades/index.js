@@ -23,6 +23,7 @@ const Trades = () => {
   const addTrade = async (values) => {
     setSubmitting(true);
     const payload = {
+      uid: user?.uid,
       displayName: user?.displayName,
       photoURL: user?.photoURL,
       email: user?.email,
@@ -32,13 +33,14 @@ const Trades = () => {
     };
     try {
       const data = await addTradePost(payload);
-      if (data.success) {
-        message.success("Added the trade post!");
+      console.log(data);
+      if (data?.success) {
+        message.success(data.message);
         form.resetFields();
       }
     } catch (err) {
       console.log(err);
-      message.error("Some error occured. Please try again later.");
+      message.error(err.response.data.error);
     }
     setSubmitting(false);
   };
