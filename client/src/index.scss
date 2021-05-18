@@ -46,14 +46,15 @@ code {
 
 .ant-drawer-content,
 .ant-drawer-header {
+  border: none;
+  background-color: #102037 !important;
   .ant-form-item .ant-input-textarea-show-count::after {
     color: white;
   }
   .anticon-close {
     color: white;
   }
-  border: none;
-  background-color: #102037 !important;
+
   .ant-drawer-title {
     color: white !important;
     font-size: 20px;

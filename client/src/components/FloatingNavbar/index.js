@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import "./index.scss";
 
-const FloatingNavbar = () => {
+const FloatingNavbar = ({ location }) => {
   const [selected, setSelected] = useState(0);
+
+  useEffect(() => {
+    if (location.pathname === "/trades") setSelected(1);
+    else if (location.pathname === "/reviews") setSelected(0);
+    else if (location.pathname === "/profile") setSelected(2);
+  }, [location]);
 
   return (
     <div className="floatingNavbarContainer">
@@ -33,4 +40,4 @@ const FloatingNavbar = () => {
   );
 };
 
-export default FloatingNavbar;
+export default withRouter(FloatingNavbar);

@@ -1,5 +1,4 @@
 import "./index.scss";
-import Demo from "../../../assets/landing.svg";
 
 const ReviewCard = () => {
   return (
