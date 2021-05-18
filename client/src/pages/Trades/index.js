@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import "./index.scss";
-import Post from "./post";
+import TradeCard from "../../components/TradeCard";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useContext } from "react";
 import Masonry from "react-responsive-masonry";
+
+import demoDP from "../../assets/demoDP.png";
 
 const Trades = () => {
   const { isDarkTheme } = useContext(ThemeContext);
@@ -15,11 +16,20 @@ const Trades = () => {
         <button>Add Resource</button>
       </div>
       <Masonry columnsCount={3} className="trades-posts">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {[0, 1, 2, 3, 4, 5].map((key) => (
+          <TradeCard
+            displayName="John Doe"
+            email="john@doe.com"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, 
+            purus sit amet luctus venenatis Lorem ipsum dolor sit amet, 
+            consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis 
+            Lorem ipsum dolor sit amet,"
+            bookName="BOOK_NAME"
+            genre="GENRE"
+            photoURL={demoDP}
+            key={key}
+          />
+        ))}
       </Masonry>
     </div>
   );
