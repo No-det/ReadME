@@ -2,17 +2,14 @@ const Trade = require("../models/trade");
 const User = require("../models/user");
 
 exports.addTrade = async (req, res) => {
-  let newTrade;
-  Trade.create({ ...req.body }).then(async (trade) => {
-    newTrade = await trade.save();
-    console.log(newTrade);
-    User.findOne({ uid: newTrade.uid })
-      .then((user) => {
-        console.log(user);
+  Trade.create({ ...req.body }).then((trade) => {
+    User.findOne({ uid: req.body.uid })
+      .then(async (user) => {
         if (user) {
-          user.trades.push(newTrade._id);
-          user.save();
-          console.log(`New trade added by ${user.displayName} !`);
+          user.trades.push(trade._id);
+          await user.save();
+          await trade.save();
+          console.log(`New trade: ${trade.bookName} by ${user.displayName}`);
           return res
             .status(201)
             .json({ success: true, message: "New trade added" });

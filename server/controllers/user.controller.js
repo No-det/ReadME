@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 exports.addUser = (req, res) => {
-  console.log(req.body);
+  console.log(req.body.displayName);
   User.findOne({ uid: req.body.uid })
     .then((user) => {
       if (user) {

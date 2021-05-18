@@ -2,15 +2,14 @@ const Review = require("../models/review");
 const User = require("../models/user");
 
 exports.addReview = async (req, res) => {
-  let newReview;
-  Review.create({ ...req.body }).then(async (review) => {
-    newReview = await review.save();
-    User.findOne({ uid: newReview.uid })
-      .then((user) => {
+  Review.create({ ...req.body }).then((review) => {
+    User.findOne({ uid: req.body.uid })
+      .then(async (user) => {
         if (user) {
-          user.reviews.push(newReview._id);
-          user.save();
-          console.log(user);
+          user.reviews.push(review._id);
+          await user.save();
+          await review.save();
+          console.log(`New review: ${review.bookName} by ${user.displayName}`);
           return res
             .status(201)
             .json({ success: true, message: "New review added" });
