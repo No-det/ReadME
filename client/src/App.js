@@ -1,12 +1,21 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { useContext } from "react";
+import { BrowserRouter, Redirect, Switch } from "react-router-dom";
+
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import Trades from "./pages/Trades";
+import Profile from "./pages/Profile";
+import AuthProvider, { AuthContext } from "./contexts/AuthContext";
 import ThemeProvider from "./contexts/ThemeContext";
-import AuthProvider from "./contexts/AuthContext";
 
 const App = () => {
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
+
   return (
     <AuthProvider>
       <ThemeProvider>
@@ -14,8 +23,10 @@ const App = () => {
           <Switch>
             <Navbar>
               <div className="container">
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/trades" component={Trades} />
+                <PublicRoute exact path="/" component={Landing} />
+                <PrivateRoute path="/reviews" component={Trades} />
+                <PrivateRoute path="/trades" component={Trades} />
+                <PrivateRoute path="/profile" component={Profile} />
               </div>
             </Navbar>
           </Switch>

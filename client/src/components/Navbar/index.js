@@ -13,9 +13,9 @@ const Navbar = ({ children }) => {
         <div className="actionContainer">
           <select>
             <option default>Select Genre</option>
-            <option key="one">One</option>
-            <option key="one">One</option>
-            <option key="one">One</option>
+            <option key="1">One</option>
+            <option key="2">One</option>
+            <option key="3">One</option>
           </select>
           <input type="text" placeholder="Search for a book" />
           <div className="searchBtn">
