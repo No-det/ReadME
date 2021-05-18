@@ -18,7 +18,7 @@ const Trades = () => {
 
   const { isDarkTheme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
-  const { form } = Form.useForm();
+  const [form] = Form.useForm();
 
   const addTrade = async (values) => {
     setSubmitting(true);
@@ -31,17 +31,18 @@ const Trades = () => {
       bookName: values.bookName,
       genre: values.genre,
     };
-    try {
-      const data = await addTradePost(payload);
-      console.log(data);
-      if (data?.success) {
-        message.success(data.message);
-        form.resetFields();
-      }
-    } catch (err) {
-      console.log(err);
-      message.error(err.response.data.error);
-    }
+    addTradePost(payload)
+      .then((data) => {
+        console.log(data);
+        if (data?.success) {
+          message.success(data.message);
+          form.resetFields();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(err.toString());
+      });
     setSubmitting(false);
   };
 
