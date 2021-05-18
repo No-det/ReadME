@@ -1,18 +1,17 @@
+import { useHistory } from "react-router-dom";
+
 import { signInWithGoogle } from "../../firebase/firebase";
 import landingImage from "../../assets/landing.png";
-
-import { addUser } from "../../api/auth";
 
 import "./index.scss";
 
 const Landing = () => {
+  const history = useHistory();
+
   const signIn = async () => {
     try {
       const result = await signInWithGoogle();
-      if (result.user) {
-        const data = await addUser(result.user);
-        console.log(data);
-      }
+      if (result.user) history.push("/reviews");
     } catch (err) {
       console.log(err);
     }

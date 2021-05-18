@@ -1,40 +1,36 @@
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+
 import "./index.scss";
 
 const Profile = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="profileContainer">
       <div className="profileTop">
         <div className="profileBanner">
-          <img
-            src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1355&q=80"
-            alt="Banner"
-          />
+          <img src={user?.banner} alt="Banner" />
           <div className="followContainer">
             <div className="following">
               <p>Following</p>
-              <span>1000</span>
+              <span>{user?.following?.length}</span>
             </div>
             <div className="followers">
               <p>Followers</p>
-              <span>236</span>
+              <span>{user?.followers?.length}</span>
             </div>
           </div>
         </div>
         <div className="profileImage">
-          <img
-            src="https://pbs.twimg.com/profile_images/725321660484583424/ArQ4fM3k_400x400.jpg"
-            alt=""
-          />
+          <img src={user?.photoURL} alt={user?.displayName} />
         </div>
       </div>
       <div className="profileContentWrapper">
         <div className="profileContent">
-          <h2>Betram Gilfoyle</h2>
-          <small>gilfoyle@piedpiper.com</small>
-          <p>
-            Master coder. Satanist. Senior Systems Architect @PiedPiper I hate
-            Dinesh
-          </p>
+          <h2>{user?.displayName}</h2>
+          <small>{user?.email}</small>
+          <p>{user?.bio}</p>
         </div>
       </div>
     </div>
