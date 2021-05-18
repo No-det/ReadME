@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ReviewSchema = require("./reviews").schema;
-const TradeSchema = require("./trades").schema;
+const ReviewSchema = require("./review").schema;
+const TradeSchema = require("./trade").schema;
 
 const UserSchema = new Schema({
   uid: { type: String, required: true },
@@ -32,7 +32,7 @@ const UserSchema = new Schema({
   ],
   bio: { type: String, required: false },
   reviews: [ReviewSchema],
-  trades: [TradeSchema],
+  trades: [{ type: mongoose.Schema.Types.ObjectId, ref: "trade" }],
 });
 
 module.exports = mongoose.model("user", UserSchema);

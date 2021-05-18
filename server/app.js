@@ -3,7 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const apiRoutes = require("./routes/api.routes");
+const userRoutes = require("./routes/user.routes");
+const tradeRoutes = require("./routes/trade.routes");
+const reviewRoutes = require("./routes/review.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -38,7 +40,9 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/api/v1", apiRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/trade", tradeRoutes);
+app.use("/api/v1/review", reviewRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening at *:${PORT}`);

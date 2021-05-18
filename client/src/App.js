@@ -11,6 +11,7 @@ import Trades from "./pages/Trades";
 import Profile from "./pages/Profile";
 import AuthProvider, { AuthContext } from "./contexts/AuthContext";
 import ThemeProvider from "./contexts/ThemeContext";
+import FloatingNavbar from "./components/FloatingNavbar";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Navbar>
+              <FloatingNavbar />
               <div className="container">
                 <PublicRoute exact path="/" component={Landing} />
                 <PrivateRoute path="/reviews" component={Reviews} />

@@ -1,5 +1,8 @@
 .navMain {
   position: fixed;
+  max-width: 1440px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   height: 10vh;
   display: flex;
