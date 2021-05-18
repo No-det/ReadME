@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import Trades from "./pages/Trades";
-import ThemeProvider from './contexts/ThemeContext';
+import ThemeProvider from "./contexts/ThemeContext";
 import AuthProvider from "./contexts/AuthContext";
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
         </BrowserRouter>
       </ThemeProvider>
     </AuthProvider>
-  )
-}
+  );
+};
 
 export default App;
