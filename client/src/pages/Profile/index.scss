@@ -55,12 +55,11 @@
   .profileContentWrapper {
     margin: 0;
     background-color: #2c3d55;
-    display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    display: flex;
+    flex-direction: column;
+    padding-left: 220px;
     .profileContent {
       padding: 15px 20px 36px 20px;
-      grid-column-start: 2;
-      grid-column-end: 3;
       h2 {
         font-size: 36px;
         margin: 10px 0;
@@ -71,6 +70,81 @@
       p {
         margin: 10px 0;
         font-size: 18px;
+      }
+    }
+    .mobileFollowContainer {
+      display: none;
+    }
+  }
+  .profilePosts {
+    .ant-tabs {
+      margin-top: 40px;
+      color: white;
+      .ant-tabs-tab {
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+    .ant-tabs-top > .ant-tabs-nav::before {
+      border-bottom: none;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profileContainer {
+    .profileTop {
+      .profileBanner {
+        .followContainer {
+          display: none;
+        }
+      }
+    }
+    .profileContentWrapper {
+      padding-top: 30px;
+      padding-left: 0;
+      .profileContent {
+        padding: 10px 15px 0 15px;
+        h2 {
+          font-size: 24px;
+          margin-bottom: 0;
+        }
+        small {
+          font-size: 14px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+      .mobileFollowContainer {
+        padding: 0 15px 20px 15px;
+        display: flex;
+        p {
+          padding-right: 10px;
+          font-weight: 400;
+          font-size: 14px;
+          span {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .profileTop {
+      .profileBanner {
+        height: 200px;
+        img {
+          height: 200px;
+        }
+      }
+      .profileImage {
+        position: absolute;
+        bottom: 0;
+        img {
+          border-radius: 50%;
+          object-fit: cover;
+          height: 100px;
+          width: 100px;
+        }
       }
     }
   }
