@@ -3,7 +3,7 @@ import "./index.scss";
 import Post from "./post";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useContext } from "react";
-import Masonry from "react-responsive-masonry";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const Trades = () => {
   const { isDarkTheme } = useContext(ThemeContext);
@@ -14,13 +14,15 @@ const Trades = () => {
         <h2 style={{ color: isDarkTheme ? "#2C3D55" : "#FFFFFF" }}>Trade</h2>
         <button>Add Resource</button>
       </div>
-      <Masonry columnsCount={3} className="trades-posts">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </Masonry>
+      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 1100: 2, 1400: 3 }}>
+        <Masonry className="trades-posts">
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+        </Masonry>
+      </ResponsiveMasonry>
     </div>
   );
 };

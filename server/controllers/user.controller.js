@@ -4,8 +4,11 @@ exports.addUser = (req, res) => {
   console.log(req.body);
   User.findOne({ uid: req.body.uid })
     .then((user) => {
-      if (user) return res.status(200).json({ success: true, user: user });
-      else {
+      if (user) {
+        user.populate("trades");
+        user.populate("reviews");
+        return res.status(200).json({ success: true, user: user });
+      } else {
         const newUser = {
           uid: req.body.uid,
           displayName: req.body.displayName,
