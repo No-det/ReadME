@@ -1,3 +1,4 @@
+@import url("antd/dist/antd.css");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
 
 * {
@@ -19,7 +20,18 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #102037;
+  color: white !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   color: white;
+  margin: 0;
 }
 
 code {
@@ -37,7 +49,7 @@ code {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0;
+    padding: 0px;
   }
 }
 

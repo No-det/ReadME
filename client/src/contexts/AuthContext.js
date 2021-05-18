@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 
+import { addUser } from "../api/auth";
 import { auth } from "../firebase/firebase";
 
 export const AuthContext = createContext({ user: null });
@@ -11,17 +12,25 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
-      console.log(user);
       setUser(user);
-      if (user) setToken(user.getIdToken());
-      else setToken(null);
+      if (user) {
+        setToken(user.getIdToken());
+        try {
+          const data = await addUser(user);
+          if (data.success) {
+            setUser(data.user);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      } else setToken(null);
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token }}>
+    <AuthContext.Provider value={{ user, token, setUser }}>
       {!loading && props.children}
     </AuthContext.Provider>
   );

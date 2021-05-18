@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { BrowserRouter, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";

@@ -1,5 +1,6 @@
 .landing__container {
   min-height: 100vh;
+  padding: 0 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -19,9 +20,15 @@
       text-decoration: none;
       color: white;
       padding: 15px 58px;
-      background-color: #5b55c2;
+      background: #102037;
+      box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
       margin-top: 25px;
       border-radius: 4px;
+      &:active {
+        transition: all 0.3s ease-in-out;
+        box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
+          inset -4.8px -4.8px 9.6px #152947;
+      }
     }
   }
 
