@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
   uid: { type: String, required: true },
   bookName: { type: String, required: true },
-  IBNNumber: { type: String, required: true },
+  ISBNNumber: { type: String, required: true },
   author: { type: String, required: true },
   language: { type: String, required: true },
   coverImage: { type: String, required: true },
@@ -21,7 +21,7 @@ const ReviewSchema = new Schema({
       upvotes: { type: Number, required: true },
     },
   ],
-  rating: { type: Number, required: true },
+  rating: { type: Number, required: true, default: 0 },
   createdAt: { type: Date, default: Date.now },
   upvote: [{ type: String, require: false }],
 });

@@ -4,18 +4,34 @@ import ReviewCard from "../../components/ReviewCard";
 import Saly from "../../assets/saly.svg";
 import { Link } from "react-router-dom";
 import Arrow from "../../assets/arrowCircle.svg";
-import { Button, Drawer, Input, Form } from "antd";
-import { useContext, useState } from "react";
+import { Button, Drawer, Input, Form, message } from "antd";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+
+import { addReviewPost, getReviews } from "../../api/review";
 
 const { TextArea } = Input;
 
 const Reviews = () => {
+  const [reviews, setReviews] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [form] = Form.useForm();
 
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    getReviews(user.uid)
+      .then((reviews) => {
+        setReviews(reviews.reviews);
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(
+          "Some error occured while fetching the latest reviews. Please try again later."
+        );
+      });
+  }, [user.uid]);
 
   const addReview = async (values) => {
     setSubmitting(true);
@@ -26,18 +42,18 @@ const Reviews = () => {
       email: user?.email,
       ...values,
     };
-    // addTradePost(payload)
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data?.success) {
-    //       message.success(data.message);
-    //       form.resetFields();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     message.error(err.toString());
-    //   });
+    console.log(payload);
+    addReviewPost(payload)
+      .then((data) => {
+        console.log(data);
+        if (data?.success) {
+          message.success(data.message);
+          form.resetFields();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     setSubmitting(false);
   };
 
@@ -47,13 +63,8 @@ const Reviews = () => {
         <div className="reviewHead">
           <h3>Reviews</h3>
           <div className="cardCont">
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            {reviews?.length > 0 &&
+              reviews?.map((review) => <ReviewCard review={review} />)}
           </div>
         </div>
       </div>
@@ -156,7 +167,7 @@ const Reviews = () => {
           </Form.Item>
           <Form.Item
             label="ISBN Number"
-            name="isbn"
+            name="ISBNNumber"
             rules={[
               {
                 required: true,
@@ -172,7 +183,7 @@ const Reviews = () => {
           </Form.Item>
           <Form.Item
             label="Cover Image"
-            name="cover"
+            name="coverImage"
             rules={[
               {
                 required: true,
@@ -188,7 +199,7 @@ const Reviews = () => {
           </Form.Item>
           <Form.Item
             label="Link"
-            name="link"
+            name="linkToPurchase"
             rules={[
               {
                 required: true,
@@ -204,7 +215,7 @@ const Reviews = () => {
           </Form.Item>
           <Form.Item
             label="Year of Publication"
-            name="yop"
+            name="yearOfPublication"
             rules={[
               {
                 required: true,

@@ -36,7 +36,12 @@ const Review = (props) => {
           <Link to="/reviews">Check other latest reviews</Link>
         </div>
       ) : (
-        <h2>This is the book review page for {props?.match?.params?.id}</h2>
+        <div>
+          <div>
+            <img src={review?.coverImage} alt={review?.bookName} />
+          </div>
+          <div></div>
+        </div>
       )}
     </div>
   );
