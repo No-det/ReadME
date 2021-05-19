@@ -88,3 +88,30 @@ exports.getReview = (req, res) => {
       });
     });
 };
+
+exports.upvote = async (req, res) => {
+  try {
+    const review = Review.findById(req?.params?.id);
+    let currentUpvote = review.upvote;
+    let indexOfUpvote = currentUpvote.indexOf(req.uid);
+    let newUpvotes = [];
+    if (indexOfUpvote !== -1)
+      newUpvotes = currentUpvote.splice(indexOfUpvote, 1);
+    else newUpvotes = currentUpvote.push(req.uid);
+    const newReview = Review.findByIdAndUpdate(
+      req?.params?.id,
+      { upvote: newUpvotes },
+      { new: true }
+    );
+    res.state(200).json({
+      success: true,
+      review: newReview,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "Some error occurred! Please try again later.",
+    });
+  }
+};
