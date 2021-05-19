@@ -30,7 +30,8 @@ exports.addUser = (req, res) => {
           .catch((err) => {
             console.log(err);
             return res.status(400).json({
-              error:
+              success: false,
+              message:
                 "Some error occured while creating acount. Please try again later",
             });
           });
@@ -39,7 +40,33 @@ exports.addUser = (req, res) => {
     .catch((err) => {
       console.log(err);
       return res.status(400).json({
-        error: "Some error occurred. Try again later",
+        success: false,
+        message: "Some error occurred. Try again later",
       });
     });
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { uid: req.uid },
+      { ...req.body },
+      { new: true }
+    );
+    if (user)
+      return res.status(200).json({
+        success: true,
+        user: user,
+      });
+    else
+      return res.status(404).json({
+        success: false,
+        message: "User details not found. Try again later!",
+      });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      message: "Some error occurred! Try again later.",
+    });
+  }
 };

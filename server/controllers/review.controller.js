@@ -93,3 +93,32 @@ exports.getReview = (req, res) => {
       });
     });
 };
+
+exports.upvote = async (req, res) => {
+  try {
+    const review = await Review.findById(req?.params?.id);
+    let currentUpvote = review.upvotes;
+    let indexOfUpvote = currentUpvote.indexOf(req.uid);
+    let newUpvotes = [];
+    if (indexOfUpvote !== -1) {
+      newUpvotes = currentUpvote.filter((upvote) => upvote !== req.uid);
+    } else {
+      newUpvotes = [...currentUpvote, req.uid];
+    }
+    const newReview = await Review.findByIdAndUpdate(
+      req?.params?.id,
+      { upvotes: newUpvotes },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      review: newReview,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({
+      success: false,
+      message: "Some error occurred! Please try again later.",
+    });
+  }
+};
