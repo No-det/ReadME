@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
     credential: admin.credential.cert(serviceAccount),
   });
   const idToken = req?.headers?.authorization?.split(" ")[1];
-  console.log(idToken);
   if (idToken) {
     admin
       .auth()

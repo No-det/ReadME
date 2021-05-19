@@ -30,15 +30,34 @@ exports.getReviews = async (req, res) => {
   User.findOne({ uid: req.params.uid })
     .then((user) => {
       if (user) {
-        user.following.map((follower_id) => {
-          Review.find({ uid: follower_id }).then((review) =>
-            reviews.push(review)
-          );
-        });
-        return res.status(200).json({
-          success: true,
-          reviews: reviews,
-        });
+        if (user.following.length > 0) {
+          user.following.map((follower_id) => {
+            Review.find({ uid: follower_id }).then((review) =>
+              reviews.push(review)
+            );
+          });
+          return res.status(200).json({
+            success: true,
+            reviews: reviews,
+          });
+        } else {
+          Review.find({})
+            .sort({ createdAt: -1 })
+            .limit(20)
+            .then((reviews) => {
+              return res.status(200).json({
+                success: true,
+                reviews: reviews,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              return res.status(500).json({
+                success: false,
+                message: "Some error occured. Please try again later",
+              });
+            });
+        }
       }
       return res.status(404).json({ success: false, error: "User not found" });
     })
@@ -48,7 +67,7 @@ exports.getReviews = async (req, res) => {
 };
 
 exports.getReview = (req, res) => {
-  Review.findById()
+  Review.findById(req?.params?.id)
     .then((review) => {
       if (review)
         return res.status(200).json({
