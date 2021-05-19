@@ -1,0 +1,17 @@
+.invalidWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  h3 {
+    font-size: 26px;
+    text-decoration: underline;
+  }
+  p {
+    font-size: 22px;
+  }
+  a {
+    font-size: 18px;
+  }
+}

@@ -1,20 +1,23 @@
-// import { message } from "antd";
 import axios from "axios";
+
+import { auth } from "../firebase/firebase";
 
 const baseURL = process.env.REACT_APP_API_BASE_URL;
 
-const base = (options) => {
+const base = async (options) => {
+  const token = await auth.currentUser.getIdToken();
   return axios({
     baseURL,
     headers: {
       Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     },
     ...options,
   })
     .then((res) => res.data)
     .catch((err) => {
       console.log("err", err.response);
-      throw new Error(err);
+      throw err.response;
     });
 };
 

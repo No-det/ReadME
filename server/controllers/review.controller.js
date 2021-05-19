@@ -46,3 +46,26 @@ exports.getReviews = async (req, res) => {
       return res.status(500).json({ success: false, error: error.message });
     });
 };
+
+exports.getReview = (req, res) => {
+  Review.findById()
+    .then((review) => {
+      if (review)
+        return res.status(200).json({
+          success: true,
+          review: review,
+        });
+      else
+        return res.status(404).json({
+          success: false,
+          message: "Review not found",
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+        message: "Some error occurred. Please try again later.",
+      });
+    });
+};
