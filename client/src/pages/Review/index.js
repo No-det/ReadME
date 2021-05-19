@@ -36,11 +36,44 @@ const Review = (props) => {
           <Link to="/reviews">Check other latest reviews</Link>
         </div>
       ) : (
-        <div>
-          <div>
+        <div className="reviewContainer">
+          <div className="reviewLeftContainer">
             <img src={review?.coverImage} alt={review?.bookName} />
           </div>
-          <div></div>
+          <div className="reviewRightContainer">
+            <p>
+              <span>Book Name</span>
+              <span>: {review?.bookName}</span>
+            </p>
+            <p>
+              <span>Genre</span>
+              <span>: {review?.genre}</span>
+            </p>
+            <p>
+              <span>ISBN Number</span>
+              <span>: {review?.ISBNNumber}</span>
+            </p>
+            <p>
+              <span>Language</span>
+              <span>: {review?.language}</span>
+            </p>
+            <p>
+              <span>Author</span>
+              <span>: {review?.author}</span>
+            </p>
+            <p>
+              <span>Link to Purchase</span>
+              <span>: {review?.linkToPurchase}</span>
+            </p>
+            <p>
+              <span>Year Of Publication</span>
+              <span>: {review?.yearOfPublication}</span>
+            </p>
+            <p>
+              <span>Description</span>
+              <span>: {review?.description}</span>
+            </p>
+          </div>
         </div>
       )}
     </div>
