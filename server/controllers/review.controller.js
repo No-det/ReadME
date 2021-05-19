@@ -96,19 +96,21 @@ exports.getReview = (req, res) => {
 
 exports.upvote = async (req, res) => {
   try {
-    const review = Review.findById(req?.params?.id);
-    let currentUpvote = review.upvote;
+    const review = await Review.findById(req?.params?.id);
+    let currentUpvote = review.upvotes;
     let indexOfUpvote = currentUpvote.indexOf(req.uid);
     let newUpvotes = [];
-    if (indexOfUpvote !== -1)
-      newUpvotes = currentUpvote.splice(indexOfUpvote, 1);
-    else newUpvotes = currentUpvote.push(req.uid);
-    const newReview = Review.findByIdAndUpdate(
+    if (indexOfUpvote !== -1) {
+      newUpvotes = currentUpvote.filter((upvote) => upvote !== req.uid);
+    } else {
+      newUpvotes = [...currentUpvote, req.uid];
+    }
+    const newReview = await Review.findByIdAndUpdate(
       req?.params?.id,
-      { upvote: newUpvotes },
+      { upvotes: newUpvotes },
       { new: true }
     );
-    res.state(200).json({
+    res.status(200).json({
       success: true,
       review: newReview,
     });
