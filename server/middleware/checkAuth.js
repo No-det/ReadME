@@ -2,9 +2,10 @@ const admin = require("firebase-admin");
 
 module.exports = (req, res, next) => {
   const serviceAccount = require("../serviceAccountKey.json");
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-  });
+  if (!admin.apps.length)
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
   const idToken = req?.headers?.authorization?.split(" ")[1];
   if (idToken) {
     admin

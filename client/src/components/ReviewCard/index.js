@@ -1,22 +1,17 @@
+import { Link } from "react-router-dom";
 import "./index.scss";
 
-const ReviewCard = () => {
+const ReviewCard = ({ review }) => {
   return (
-    <div className="reviewCardMain">
+    <Link to={`/reviews/${review._id}`} className="reviewCardMain">
       <div className="overlay">
         <div className="text">
-          <div className="heading">Book Name</div>
-          <p>
-            Some crazy bad lame description about the book that the person has
-            read and is sharing.
-          </p>
+          <div className="heading">{review?.bookName}</div>
+          <p>{review.description}</p>
         </div>
       </div>
-      <img
-        src="https://www.writersdigest.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTcxMDY0NzcxMzIzNTY5NDEz/image-placeholder-title.jpg"
-        alt="landing"
-      />
-    </div>
+      <img src={review.coverImage} alt={review?.bookName} />
+    </Link>
   );
 };
 

@@ -2,10 +2,12 @@ const Review = require("../models/review");
 const User = require("../models/user");
 
 exports.addReview = async (req, res) => {
-  Review.create({ ...req.body }).then((review) => {
-    User.findOne({ uid: req.body.uid })
-      .then(async (user) => {
-        if (user) {
+  console.log(req.body);
+
+  User.findOne({ uid: req.body.uid })
+    .then(async (user) => {
+      if (user) {
+        Review.create({ ...req.body }).then(async (review) => {
           user.reviews.push(review._id);
           await user.save();
           await review.save();
@@ -13,16 +15,17 @@ exports.addReview = async (req, res) => {
           return res
             .status(201)
             .json({ success: true, message: "New review added" });
-        }
+        });
+      } else {
         return res
           .status(400)
           .json({ success: false, error: "User not found" });
-      })
-      .catch((error) => {
-        console.log(error);
-        return res.status(500).json({ success: false, error: error.message });
-      });
-  });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      return res.status(500).json({ success: false, error: error.message });
+    });
 };
 
 exports.getReviews = async (req, res) => {
@@ -58,8 +61,10 @@ exports.getReviews = async (req, res) => {
               });
             });
         }
-      }
-      return res.status(404).json({ success: false, error: "User not found" });
+      } else
+        return res
+          .status(404)
+          .json({ success: false, error: "User not found" });
     })
     .catch((error) => {
       return res.status(500).json({ success: false, error: error.message });
