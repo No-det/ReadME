@@ -1,5 +1,7 @@
 const Review = require("../models/review");
 const User = require("../models/user");
+const Comment = require("../models/comment");
+const comment = require("../models/comment");
 
 exports.addReview = async (req, res) => {
   console.log(req.body);
@@ -121,4 +123,87 @@ exports.upvote = async (req, res) => {
       message: "Some error occurred! Please try again later.",
     });
   }
+};
+
+exports.addComment = (req, res) => {
+  User.findOne({ uid: req.body.uid })
+    .then((user) => {
+      if (user) {
+        Review.findOne({ _id: req.params.id })
+          .then(async (review) => {
+            if (review) {
+              let comment = await Comment.create({
+                uid: req.body.uid,
+                name: user.displayName,
+                photoURL: user.photoURL,
+                comment: req.body.comment,
+                upvotes: [],
+              });
+              review.comments.push(comment);
+              await review.save();
+              return res
+                .status(201)
+                .json({ success: true, message: "Comment added" });
+            }
+            return res
+              .status(404)
+              .json({ success: false, message: "Review not found." });
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).json({
+              success: false,
+              message: "Some error occured. Please try again later.",
+            });
+          });
+      }
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Some error occured. Please try again later.",
+      });
+    });
+};
+
+exports.upvoteComment = (req, res) => {
+  Review.findOne({ _id: req.params.rid })
+    .then(async (review) => {
+      if (review) {
+        let comments = review.comments;
+        comment = comments.find((doc) => doc._id == req.params.cid);
+        if (comment) {
+          if (comment.upvotes.contains(req.param.uid))
+            comment.upvotes = comment.upvotes.filter(
+              (uid) => uid !== req.params.uid
+            );
+          else comment.upvotes = [...comment.upvotes, req.params.uid];
+          review.comments = [
+            ...comments.filter((doc) => doc._id !== comment._id),
+            comment,
+          ];
+          await review.save();
+          return res
+            .status(200)
+            .json({ success: true, message: "Comment upvoted" });
+        }
+        return res
+          .status(404)
+          .json({ success: false, message: "Comment not found." });
+      }
+      return res
+        .status(404)
+        .json({ success: false, message: "Review not found." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Some error occured. Please try again later.",
+      });
+    });
 };
