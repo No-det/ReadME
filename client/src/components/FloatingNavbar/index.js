@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import dragIcon from "../../assets/move.svg";
-import Draggable from "react-draggable";
+// import Draggable from "react-draggable";
 
 import "./index.scss";
 
