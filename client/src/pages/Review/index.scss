@@ -42,16 +42,10 @@
     }
   }
 }
-.reviewComments {
-  display: flex;
-  flex-direction: column;
-  .comments {
-    font-weight: 400;
-    font-size: 24px;
-    margin-top: 20px;
-    border-bottom: 1px solid gray;
-    .numberOfComments {
-      font-weight: 700;
-    }
+.commentSection {
+  padding: 30px 0 100px 0;
+
+  div iframe html body .layout header {
+    display: none !important;
   }
 }
