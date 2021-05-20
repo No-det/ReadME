@@ -11,3 +11,7 @@ export const getReviews = (uid) => {
 export const addReviewPost = (payload) => {
   return post("/review/add", payload);
 };
+
+export const addComment = (id, payload) => {
+  return post(`/review/comment/${id}`, payload);
+};

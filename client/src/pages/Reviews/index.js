@@ -63,8 +63,14 @@ const Reviews = () => {
         <div className="reviewHead">
           <h3>Reviews</h3>
           <div className="cardCont">
-            {reviews?.length > 0 &&
-              reviews?.map((review) => <ReviewCard review={review} />)}
+            {reviews?.length > 0 ? (
+              reviews?.map((review) => <ReviewCard review={review} />)
+            ) : (
+              <div className="reviewLoading">
+                <h3>Crunching Latest Book Reviews</h3>
+                <div className="loader"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>

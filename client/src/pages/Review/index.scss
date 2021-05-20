@@ -30,9 +30,7 @@
     p {
       width: 100%;
       font-size: 22px;
-      color: lightgray;
       display: flex;
-
       & span:first-child {
         font-weight: 700;
         min-width: 250px;
@@ -42,5 +40,61 @@
         width: 100%;
       }
     }
+  }
+}
+.commentSection {
+  padding: 30px 0 100px 0;
+
+  div iframe html body .layout header {
+    display: none !important;
+  }
+}
+
+#disqus_thread {
+  position: relative;
+}
+#disqus_thread:before {
+  content: "";
+  display: block;
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  top: 140px;
+  background: #102037;
+}
+#disqus_thread:after {
+  content: "";
+  display: block;
+  height: 55px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: #102037;
+}
+
+#disqus_thred #main-nav {
+  display: none;
+}
+
+@media screen and (max-width: 903px) {
+  #disqus_thread:before {
+    top: 220px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #disqus_thread:before {
+    top: 140px;
+  }
+}
+@media screen and (max-width: 724px) {
+  #disqus_thread:before {
+    top: 220px;
+  }
+}
+
+@media screen and (max-width: 404px) {
+  #disqus_thread:before {
+    top: 290px;
   }
 }
