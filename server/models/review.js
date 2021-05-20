@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const CommentSchema = require("./comment").schema;
+
 const ReviewSchema = new Schema({
   uid: { type: String, required: true },
   bookName: { type: String, required: true },
@@ -12,15 +14,7 @@ const ReviewSchema = new Schema({
   linkToPurchase: { type: String, required: true },
   yearOfPublication: { type: String, required: true },
   genre: { type: String, required: true },
-  comments: [
-    {
-      uid: { type: String, required: true },
-      name: { type: String, required: true },
-      photoURL: { type: String, required: true },
-      comment: { type: String, required: true },
-      upvotes: { type: Number, required: true },
-    },
-  ],
+  comments: [CommentSchema],
   rating: { type: Number, required: true, default: 0 },
   createdAt: { type: Date, default: Date.now },
   upvotes: [{ type: String, require: false }],

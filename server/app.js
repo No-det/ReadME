@@ -48,5 +48,5 @@ app.use("/api/v1/trade", tradeRoutes);
 app.use("/api/v1/review", reviewRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server listening at *:${PORT}`);
+  console.log(`Server listening at http://localhost:${PORT}`);
 });
