@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const User = require("../models/user");
 
 exports.addUser = (req, res) => {
@@ -73,32 +74,81 @@ exports.updateUser = async (req, res) => {
 
 exports.followUser = async (req, res) => {
   try {
-    const { uid, name, email, photoURL } = req.body; //Just to know, what is coming in body.
+    const { uid, name, email, photoURL } = req.body; //Just to know, what is coming in query.
 
-    const user = await User.findById(req.uid);
-    let finalUsers = {};
+    const user = await User.findOne({ uid: req.uid });
+    let finalUsers = [];
 
     if (user) {
-      const filteredUser = user.followers.filter(
-        (follower) => follower.uid !== req.uid
+      const following = user.following;
+
+      const filteredUser = following.filter(
+        (following) => following.uid !== uid
       );
 
-      if (filteredUser.length === newfollowers.length) {
-        finalUsers = [...followers, req.body];
+      if (filteredUser.length === following.length) {
+        finalUsers = [...following, req.body];
       } else {
         finalUsers = filteredUser;
       }
 
-      const UpdatedUser = await User.findByIdAndUpdate(
-        req.uid,
-        { followers: newfollowers },
+      const UpdatedUser = await User.findOneAndUpdate(
+        { uid: req.uid },
+        { following: finalUsers },
         { new: true }
       );
 
-      res.status(200).json({
-        success: true,
-        user: UpdatedUser,
-      });
+      if (UpdatedUser) {
+        // Now the users account is added with a following, and want to add this user to followers of the other person
+        console.log("Etho oruthan followers koodiyo korayuo cheythu");
+        let finalFollowers = [];
+        const otherUser = await User.findOne({ uid: uid });
+
+        if (otherUser) {
+          const followers = otherUser.followers;
+          const filteredOtherUser = followers.filter(
+            (followers) => followers.uid !== req.uid
+          );
+
+          if (filteredOtherUser.length === followers.length) {
+            finalFollowers = [
+              ...followers,
+              {
+                uid: UpdatedUser.uid,
+                name: UpdatedUser.displayName,
+                photoURL: UpdatedUser.photoURL,
+                email: UpdatedUser.email,
+              },
+            ];
+          } else {
+            finalFollowers = filteredOtherUser;
+          }
+
+          const UpdatedOtherUser = await User.findOneAndUpdate(
+            { uid: uid },
+            { followers: finalFollowers },
+            { new: true }
+          );
+
+          if (UpdatedOtherUser) {
+            console.log("Etho oruthan following koodiyo korayuo cheythu");
+            res.status(200).json({
+              success: true,
+              user: UpdatedUser,
+            });
+          } else {
+            res.status(404).json({
+              success: false,
+              message: "The user not found!",
+            });
+          }
+        }
+      } else {
+        res.status(400).json({
+          success: false,
+          message: "Error updating user!",
+        });
+      }
     } else {
       res.status(404).json({
         success: false,

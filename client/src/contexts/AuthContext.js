@@ -14,6 +14,7 @@ const AuthProvider = (props) => {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
       setUser(user);
       if (user) {
+        // console.log("new", await user.getIdToken());
         setToken(user.getIdToken());
         try {
           const data = await addUser(user);
