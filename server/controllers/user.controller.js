@@ -70,3 +70,46 @@ exports.updateUser = async (req, res) => {
     });
   }
 };
+
+exports.followUser = async (req, res) => {
+  try {
+    const { uid, name, email, photoURL } = req.body; //Just to know, what is coming in body.
+
+    const user = await User.findById(req.uid);
+    let finalUsers = {};
+
+    if (user) {
+      const filteredUser = user.followers.filter(
+        (follower) => follower.uid !== req.uid
+      );
+
+      if (filteredUser.length === newfollowers.length) {
+        finalUsers = [...followers, req.body];
+      } else {
+        finalUsers = filteredUser;
+      }
+
+      const UpdatedUser = await User.findByIdAndUpdate(
+        req.uid,
+        { followers: newfollowers },
+        { new: true }
+      );
+
+      res.status(200).json({
+        success: true,
+        user: UpdatedUser,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "The user is not found! Try again.",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      success: false,
+      message: "Some error occured! Try again later.",
+    });
+  }
+};
