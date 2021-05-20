@@ -39,7 +39,7 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.status(200).json({
-    message: "API Working",
+    message: "We make you read! But this is not where you should be reading.",
   });
 });
 
