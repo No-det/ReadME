@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import dragIcon from "../../assets/move.svg";
+import Draggable from "react-draggable";
 
 import "./index.scss";
 
@@ -14,6 +16,7 @@ const FloatingNavbar = ({ location }) => {
   }, [location]);
 
   return (
+    // <Draggable>
     <div className="floatingNavbarContainer">
       <Link
         to="/reviews"
@@ -36,7 +39,11 @@ const FloatingNavbar = ({ location }) => {
       >
         <div>Profile</div>
       </Link>
+      <div>
+        <img src={dragIcon} alt="drag" id="dragIcon" />
+      </div>
     </div>
+    // </Draggable>
   );
 };
 
