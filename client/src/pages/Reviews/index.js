@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { addReviewPost, getReviews } from "../../api/review";
+import { getUser } from "../../api/auth";
 
 const { TextArea } = Input;
 
@@ -21,6 +22,7 @@ const Reviews = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
+    getUser(user.uid).then((data) => console.log(data));
     getReviews(user.uid)
       .then((reviews) => {
         setReviews(reviews.reviews);

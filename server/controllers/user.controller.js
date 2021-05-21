@@ -5,10 +5,10 @@ const Trade = require("../models/trade");
 exports.addUser = (req, res) => {
   console.log(req.body.displayName);
   User.findOne({ uid: req.body.uid })
-    .then((user) => {
+    .then(async (user) => {
       if (user) {
-        user.populate("trades");
-        user.populate("reviews");
+        await user.populate("trades").execPopulate();
+        await user.populate("reviews").execPopulate();
         return res.status(200).json({ success: true, user: user });
       } else {
         const newUser = {
@@ -167,10 +167,11 @@ exports.followUser = async (req, res) => {
 
 exports.getUser = (req, res) => {
   User.findOne({ uid: req.params.uid })
-    .then((user) => {
+    .then(async (user) => {
       if (user) {
-        user.populate("trades");
-        user.populate("reviews");
+        await user.populate("trades").execPopulate();
+        await user.populate("reviews").execPopulate();
+        console.log(user);
         return res.status(200).json({
           success: true,
           user: user,
