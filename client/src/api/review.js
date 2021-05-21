@@ -4,8 +4,8 @@ export const getReview = (id) => {
   return get(`/review/${id}`);
 };
 
-export const getReviews = (uid) => {
-  return get(`/review/getall/${uid}`);
+export const getReviews = () => {
+  return get(`/review/getall`);
 };
 
 export const addReviewPost = (payload) => {

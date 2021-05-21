@@ -32,7 +32,7 @@ exports.addReview = async (req, res) => {
 
 exports.getReviews = async (req, res) => {
   let reviews = [];
-  User.findOne({ uid: req.params.uid })
+  User.findOne({ uid: req.uid })
     .then((user) => {
       if (user) {
         if (user.following.length > 0) {

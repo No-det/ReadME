@@ -1,6 +1,8 @@
+import { message } from "antd";
 import { useState, useEffect, createContext } from "react";
 
 import { addUser } from "../api/auth";
+import { getReviews } from "../api/review";
 import { auth } from "../firebase/firebase";
 
 export const AuthContext = createContext({ user: null });
@@ -9,16 +11,19 @@ const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const unsubscribe = auth.onIdTokenChanged(async (user) => {
       setUser(user);
       if (user) {
+        // console.log("new", await user.getIdToken());
         setToken(user.getIdToken());
         try {
           const data = await addUser(user);
           if (data.success) {
             setUser(data.user);
+            getAllReviews();
           }
         } catch (err) {
           console.log(err);
@@ -29,8 +34,21 @@ const AuthProvider = (props) => {
     return unsubscribe;
   }, []);
 
+  const getAllReviews = () => {
+    getReviews()
+      .then((res) => {
+        console.log(res);
+        if (res.success) setReviews(res.reviews);
+        else message.error(res.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(err.toString());
+      });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, setUser }}>
+    <AuthContext.Provider value={{ user, token, setUser, reviews }}>
       {!loading && props.children}
     </AuthContext.Provider>
   );
