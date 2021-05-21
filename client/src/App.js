@@ -31,7 +31,7 @@ const App = () => {
                 <PrivateRoute exact path="/reviews" component={Reviews} />
                 <PrivateRoute exact path="/reviews/:id" component={Review} />
                 <PrivateRoute exact path="/trades" component={Trades} />
-                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute exact path="/user/:id" component={Profile} />
               </div>
             </Navbar>
           </Switch>

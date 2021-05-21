@@ -1,4 +1,4 @@
-import { post } from "./base";
+import { get, post } from "./base";
 
 export const addUser = (user) => {
   return post("/user/add", user);
@@ -6,4 +6,8 @@ export const addUser = (user) => {
 
 export const updateUser = (data) => {
   return post("/user/update", data);
+};
+
+export const getUser = (uid) => {
+  return get(`/user/${uid}`);
 };

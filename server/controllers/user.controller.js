@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const Review = require("../models/review");
+const Trade = require("../models/trade");
 
 exports.addUser = (req, res) => {
   console.log(req.body.displayName);
@@ -159,6 +161,50 @@ exports.followUser = async (req, res) => {
     res.status(400).json({
       success: false,
       message: "Some error occured! Try again later.",
+    });
+  }
+};
+
+exports.getUser = (req, res) => {
+  User.findOne({ uid: req.params.uid })
+    .then((user) => {
+      if (user) {
+        return res.status(200).json({
+          success: true,
+          user: user,
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message:
+          "Some error occured while fetching the user data. Please try again later",
+      });
+    });
+};
+
+exports.getProfileReviewsTrades = async (req, res) => {
+  try {
+    const reviews = await Review.find({ uid: req.params.uid });
+    const trades = await Trade.find({ uid: req.params.uid });
+    return res.status(200).json({
+      success: true,
+      reviews: reviews,
+      trades: trades,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      message:
+        "Some error occured while fetching the reviews and trades of the user. Please try again after sometime",
     });
   }
 };

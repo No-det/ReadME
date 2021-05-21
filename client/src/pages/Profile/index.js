@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Tabs, Drawer, Form, Input, Button, message } from "antd";
 
 import { AuthContext } from "../../contexts/AuthContext";
@@ -6,7 +6,8 @@ import ProfileReviews from "../../components/ProfileReviews";
 import ProfileTrades from "../../components/ProfileTrades";
 import "./index.scss";
 
-import { updateUser } from "../../api/auth";
+import { updateUser, getUser } from "../../api/auth";
+import { getReviewTrades } from "../../api/profile";
 
 import whatsappIcon from "../../assets/whatsapp.svg";
 import telegramIcon from "../../assets/telegram.svg";
@@ -17,14 +18,65 @@ import instagramIcon from "../../assets/instagram.svg";
 
 const { TabPane } = Tabs;
 
-const Profile = () => {
-  const { user } = useContext(AuthContext);
+const Profile = (props) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [myProfile, setMyProfile] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [connectIcon, setConnectIcon] = useState(defaultIcon);
+  const [profileData, setProfileData] = useState({});
+  const [fetchedData, setFetchedData] = useState(false);
+  const [profileReviews, setProfileReviews] = useState([]);
+  const [profileTrades, setProfileTrades] = useState([]);
+
   const [form] = Form.useForm();
 
-  console.log(user);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (props?.match?.params?.id) {
+      if (props?.match?.params?.id === user.uid) {
+        setMyProfile(true);
+        reviews(user.uid);
+        setProfileData(user);
+        setFetchedData(true);
+      } else {
+        getUser(props?.match?.params?.id)
+          .then((data) => {
+            if (data.success) {
+              setProfileData(data.user);
+              reviews(data.user.uid);
+              setFetchedData(true);
+            }
+          })
+          .catch((err) => {
+            if (err.message) {
+              message.error(err.message);
+              setFetchedData(true);
+            }
+          });
+      }
+    } else {
+      setMyProfile(true);
+      reviews(user.uid);
+      setProfileData(user);
+      setFetchedData(true);
+    }
+  }, [user, props]);
+
+  const reviews = (uid) => {
+    getReviewTrades(uid)
+      .then((data) => {
+        if (data.success) {
+          setProfileReviews(data.reviews);
+          setProfileTrades(data.trades);
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(err.message);
+      });
+  };
 
   const handleMediaChange = (e) => {
     let value = e.target.value;
@@ -65,52 +117,67 @@ const Profile = () => {
 
   return (
     <div className="profileContainer">
-      <div className="profileTop">
-        <div className="profileBanner">
-          <img src={user?.banner} alt="Banner" />
-          <div className="followContainer">
-            <div className="following">
-              <p>Following</p>
-              <span>{user?.following?.length}</span>
+      {Object.keys(profileData)?.length === 0 ? (
+        fetchedData ? (
+          <div>User does not exist</div>
+        ) : (
+          <div className="reviewLoading">
+            <h3>Fetching user data...</h3>
+            <div className="loader"></div>
+          </div>
+        )
+      ) : (
+        <div>
+          <div className="profileTop">
+            <div className="profileBanner">
+              <img src={profileData?.banner} alt="Banner" />
+              <div className="followContainer">
+                <div className="following">
+                  <p>Following</p>
+                  <span>{profileData?.following?.length}</span>
+                </div>
+                <div className="followers">
+                  <p>Followers</p>
+                  <span>{profileData?.followers?.length}</span>
+                </div>
+              </div>
             </div>
-            <div className="followers">
-              <p>Followers</p>
-              <span>{user?.followers?.length}</span>
+            <div className="profileImage">
+              <img src={profileData?.photoURL} alt={profileData?.displayName} />
             </div>
           </div>
+          <div className="profileContentWrapper">
+            <div className="profileContent">
+              <span>
+                <h2>{profileData?.displayName}</h2>
+                <small>{profileData?.email}</small>
+                <p>{profileData?.bio}</p>
+              </span>
+              {myProfile && (
+                <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+              )}
+            </div>
+            <div className="mobileFollowContainer">
+              <p>
+                <span>{profileData?.following?.length}</span> Following
+              </p>
+              <p>
+                <span>{profileData?.followers?.length}</span> Followers
+              </p>
+            </div>
+          </div>
+          <div className="profilePosts">
+            <Tabs defaultActiveKey="1" centered>
+              <TabPane tab="Reviews" key="1">
+                <ProfileReviews reviews={profileReviews} />
+              </TabPane>
+              <TabPane tab="Trades" key="2">
+                <ProfileTrades trades={profileTrades} />
+              </TabPane>
+            </Tabs>
+          </div>
         </div>
-        <div className="profileImage">
-          <img src={user?.photoURL} alt={user?.displayName} />
-        </div>
-      </div>
-      <div className="profileContentWrapper">
-        <div className="profileContent">
-          <span>
-            <h2>{user?.displayName}</h2>
-            <small>{user?.email}</small>
-            <p>{user?.bio}</p>
-          </span>
-          <button onClick={() => setIsEditing(true)}>Edit Profile</button>
-        </div>
-        <div className="mobileFollowContainer">
-          <p>
-            <span>{user?.following?.length}</span> Following
-          </p>
-          <p>
-            <span>{user?.followers?.length}</span> Followers
-          </p>
-        </div>
-      </div>
-      <div className="profilePosts">
-        <Tabs defaultActiveKey="1" centered>
-          <TabPane tab="Reviews" key="1">
-            <ProfileReviews reviews={user?.reviews} />
-          </TabPane>
-          <TabPane tab="Trades" key="2">
-            <ProfileTrades trades={user?.trades} />
-          </TabPane>
-        </Tabs>
-      </div>
+      )}
 
       <Drawer
         visible={isEditing}
@@ -122,17 +189,17 @@ const Profile = () => {
           layout="vertical"
           onFinish={handleUpdateProfile}
           initialValues={{
-            displayName: user?.displayName,
-            bio: user?.bio,
-            connect: user?.connect,
+            displayName: profileData?.displayName,
+            bio: profileData?.bio,
+            connect: profileData?.connect,
           }}
         >
           <Form.Item label="Name" name="displayName">
-            <Input value={user?.displayName} />
+            <Input value={profileData?.displayName} />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
             <Input.TextArea
-              value={user?.bio}
+              value={profileData?.bio}
               showCount
               autoSize={{ minRows: 3, maxRows: 5 }}
               maxLength={200}
@@ -144,7 +211,7 @@ const Profile = () => {
             rules={[{ type: "url", message: "Please enter a valid URL" }]}
           >
             <Input
-              value={user?.connect}
+              value={profileData?.connect}
               onChange={(e) => handleMediaChange(e)}
               addonBefore={
                 <img src={connectIcon} className="connectIcon" alt="icon" />

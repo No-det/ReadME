@@ -4,7 +4,7 @@ import "./index.scss";
 
 const ProfileTrades = ({ trades }) => {
   return (
-    <div>
+    <div className="profileTradeWrapper">
       {trades.length > 0 ? (
         <div className="profileTradeContainer">
           {trades.map((trade) => (
