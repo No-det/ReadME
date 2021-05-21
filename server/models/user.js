@@ -30,6 +30,7 @@ const UserSchema = new Schema({
   bio: { type: String, required: false },
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "review" }],
   trades: [{ type: mongoose.Schema.Types.ObjectId, ref: "trade" }],
+  connect: { type: String, required: false },
 });
 
 module.exports = mongoose.model("user", UserSchema);
