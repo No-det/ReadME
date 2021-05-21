@@ -74,21 +74,30 @@ const Trades = () => {
           </div>
         </div>
       </div>
-      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 1100: 2, 1400: 3 }}>
-        <Masonry columnsCount={3} className="trades-posts">
-          {trades?.map((trade, key) => (
-            <TradeCard
-              displayName={trade.displayName}
-              email={trade.email}
-              description={trade.description}
-              bookName={trade.bookName}
-              genre={trade.genre}
-              photoURL={trade.photoURL}
-              key={key}
-            />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      {trades.length === 0 ? (
+        <div className="reviewLoading">
+          <h3>Crunching Latest Trade Posts</h3>
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 350: 1, 1100: 2, 1400: 3 }}
+        >
+          <Masonry columnsCount={3} className="trades-posts">
+            {trades?.map((trade, key) => (
+              <TradeCard
+                displayName={trade.displayName}
+                email={trade.email}
+                description={trade.description}
+                bookName={trade.bookName}
+                genre={trade.genre}
+                photoURL={trade.photoURL}
+                key={key}
+              />
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
       <Drawer
         visible={drawerVisibility}
         placement="right"
