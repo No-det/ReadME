@@ -169,6 +169,8 @@ exports.getUser = (req, res) => {
   User.findOne({ uid: req.params.uid })
     .then((user) => {
       if (user) {
+        user.populate("trades");
+        user.populate("reviews");
         return res.status(200).json({
           success: true,
           user: user,
