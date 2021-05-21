@@ -17,7 +17,10 @@ const FloatingNavbar = ({ location }) => {
 
   return (
     // <Draggable>
-    <div className="floatingNavbarContainer">
+    <div
+      className="floatingNavbarContainer"
+      style={{ display: location.pathname === "/" ? "none" : "flex" }}
+    >
       <Link
         to="/reviews"
         className={`navLink ${selected === 0 && "selected"}`}

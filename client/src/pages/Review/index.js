@@ -1,20 +1,15 @@
 import { message } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DiscussionEmbed } from "disqus-react";
-import CryptoJS from "crypto-js";
 
 import { getReview } from "../../api/review";
-import { AuthContext } from "../../contexts/AuthContext";
 
 import "./index.scss";
 
 const Review = (props) => {
   const [review, setReview] = useState({});
   const [invalidRoute, setInvalidRoute] = useState(false);
-  const [authS3, setAuthS3] = useState("");
-
-  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -29,31 +24,9 @@ const Review = (props) => {
           setInvalidRoute(true);
         }
       }
-      disqusSignOn();
     };
     asyncFunction();
   }, []);
-
-  const disqusSignOn = () => {
-    const disqusData = {
-      id: user.uid,
-      username: user.email.split("@")[0],
-      email: user.email,
-      avatar: user.photoURL,
-    };
-
-    const disqusStr = JSON.stringify(disqusData);
-    const timestamp = Math.round(+new Date() / 1000);
-
-    const message = new Buffer(disqusStr).toString("base64");
-
-    const result = CryptoJS.HmacSHA1(
-      message + " " + timestamp,
-      process.env.REACT_APP_DISQUS_SECRET
-    );
-    const hexsig = CryptoJS.enc.Hex.stringify(result);
-    setAuthS3(message + " " + hexsig + " " + timestamp);
-  };
 
   return (
     <div>
@@ -106,20 +79,13 @@ const Review = (props) => {
           </div>
           <div className="reviewComments">
             <div className="commentSection">
-              {authS3 && (
-                <>
-                  {console.log(authS3)}
-                  <DiscussionEmbed
-                    shortname="readme-3"
-                    config={{
-                      identifier: props?.match?.params?.id,
-                      title: props?.match?.params?.id,
-                      remoteAuthS3: authS3,
-                      apiKey: process.env.REACT_APP_DISQUS_PUBLIC,
-                    }}
-                  />
-                </>
-              )}
+              <DiscussionEmbed
+                shortname="readme-3"
+                config={{
+                  identifier: props?.match?.params?.id,
+                  title: props?.match?.params?.id,
+                }}
+              />
             </div>
           </div>
         </div>

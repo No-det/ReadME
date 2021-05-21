@@ -13,7 +13,7 @@ const TradeCard = ({
     <div className="trade-post">
       <div className="head">
         <div className="head-left">
-          <img src={photoURL} alt="dp" />
+          <img src={photoURL} alt={displayName.charAt(0)} />
           <span>
             <h3>{displayName}</h3>
             <a href={`mailto:${email}`}>{email}</a>

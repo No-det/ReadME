@@ -1,5 +1,6 @@
 .trades {
   // padding-top: 12vh;
+  padding-bottom: 150px;
   .trades-head {
     display: flex;
     align-items: center;
@@ -9,11 +10,36 @@
       font-weight: 600;
       font-size: 36px;
     }
-    button {
-      background: #5b55c2;
-      color: white;
-      width: 200px;
-      font-size: 17px;
+    .posterHead {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 40px;
+      .addResBtn {
+        width: 200px;
+        height: 44px;
+        border-radius: 4px;
+        box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 22px;
+        color: #ffffff;
+        cursor: pointer;
+
+        img {
+          margin-right: 5px;
+        }
+
+        &:active {
+          transition: all 0.3s ease-in-out;
+          box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
+            inset -4.8px -4.8px 9.6px #152947;
+        }
+      }
     }
   }
 }

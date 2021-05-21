@@ -27,18 +27,44 @@ exports.addTrade = async (req, res) => {
 
 exports.getTrades = async (req, res) => {
   let trades = [];
-  User.findOne({ uid: req.params.uid })
+  User.findOne({ uid: req.uid })
     .then((user) => {
       if (user) {
-        user.following.map((follower_id) => {
-          Trade.find({ uid: follower_id }).then((trade) => trades.push(trade));
-        });
-        return res.status(200).json({
-          success: true,
-          trades: trades,
-        });
-      }
-      return res.status(404).json({ success: false, error: "User not found" });
+        if (user.following.length > 0) {
+          user.following.map((follower_id) => {
+            Trade.find({ uid: follower_id }).then((trade) =>
+              trades.push(trade)
+            );
+          });
+          if (trades.length < 20) {
+            //  If the number of trades are less than 20
+            Trade.find()
+              // .sort({ createdAt: -1 })
+              .limit(20)
+              .then((allTrades) => {
+                trades = [...trades, allTrades];
+                trades.filter((val, i) => trades.indexOf(val) === i);
+              });
+          }
+          return res.status(200).json({
+            success: true,
+            trades: trades,
+          });
+        } else {
+          Trade.find({})
+            // .sort({ createdAt: -1 }) // Uncomment after createdAt is added
+            .limit(20)
+            .then((trade) => {
+              return res.status(200).json({
+                success: true,
+                trades: trade,
+              });
+            });
+        }
+      } else
+        return res
+          .status(404)
+          .json({ success: false, error: "User not found" });
     })
     .catch((error) => {
       return res.status(500).json({ success: false, error: error.message });
