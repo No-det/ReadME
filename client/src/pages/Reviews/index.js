@@ -67,14 +67,18 @@ const Reviews = () => {
           <div className="cardCont">
             {isSearching ? (
               searchResults?.length > 0 ? (
-                searchResults?.map((search) => <ReviewCard review={search} />)
+                searchResults?.map((search, key) => (
+                  <ReviewCard review={search} key={key} />
+                ))
               ) : (
                 <div className="reviewLoading">
                   <h3>No search results</h3>
                 </div>
               )
             ) : reviews?.length > 0 ? (
-              reviews?.map((review) => <ReviewCard review={review} />)
+              reviews?.map((review, key) => (
+                <ReviewCard review={review} key={key} />
+              ))
             ) : (
               <div className="reviewLoading">
                 <h3>Crunching Latest Book Reviews</h3>

@@ -75,8 +75,27 @@
         font-size: 18px;
       }
       button {
-        width: 120px;
-        background: #5b55c2;
+        border-radius: 4px;
+        border-radius: 4px;
+        background: linear-gradient(145deg, #28374d, #2f415b);
+        box-shadow: 13px 13px 13px #253347, -13px -13px 23px #334763;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 22px;
+        color: #ffffff;
+        cursor: pointer;
+        border: none;
+
+        &:active {
+          transition: all 0.3s ease-in-out;
+          border-radius: 4px;
+          box-shadow: inset 13px 13px 13px #253347,
+            inset -13px -13px 13px #334763;
+        }
       }
     }
     .mobileFollowContainer {

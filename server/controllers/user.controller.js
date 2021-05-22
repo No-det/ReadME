@@ -184,7 +184,7 @@ exports.getUser = (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       return res.status(500).json({
         success: false,
         message:
@@ -195,15 +195,17 @@ exports.getUser = (req, res) => {
 
 exports.getProfileReviewsTrades = async (req, res) => {
   try {
+    console.log(req.params.uid);
     const reviews = await Review.find({ uid: req.params.uid });
     const trades = await Trade.find({ uid: req.params.uid });
+    console.log(reviews, trades);
     return res.status(200).json({
       success: true,
       reviews: reviews,
       trades: trades,
     });
   } catch (err) {
-    console.log(err);
+    console.log("ERROR: ", err);
     return res.status(500).json({
       success: false,
       message:

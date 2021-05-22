@@ -32,19 +32,34 @@ exports.addReview = async (req, res) => {
 
 exports.getReviews = async (req, res) => {
   let reviews = [];
+  console.log(req.uid);
   User.findOne({ uid: req.uid })
     .then((user) => {
       if (user) {
         if (user.following.length > 0) {
-          user.following.map((follower_id) => {
-            Review.find({ uid: follower_id }).then((review) =>
-              reviews.push(review)
-            );
+          user.following.map((followingUser) => {
+            Review.find({ uid: followingUser.uid }).then((review) => {
+              reviews.push(...review);
+              console.log(reviews);
+            });
           });
-          return res.status(200).json({
-            success: true,
-            reviews: reviews,
-          });
+          if (reviews.length < 20) {
+            // .sort({ createdAt: -1 })
+            Review.find({})
+              .limit(20)
+              .then((allReview) => {
+                reviews = [...reviews, ...allReview];
+                reviews.filter((val, i) => reviews.indexOf(val) === i);
+                return res.status(200).json({
+                  success: true,
+                  reviews: reviews,
+                });
+              });
+          } else
+            return res.status(200).json({
+              success: true,
+              reviews: reviews,
+            });
         } else {
           Review.find({})
             .sort({ createdAt: -1 })
