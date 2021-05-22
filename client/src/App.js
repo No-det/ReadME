@@ -14,6 +14,7 @@ import ThemeProvider from "./contexts/ThemeContext";
 import FloatingNavbar from "./components/FloatingNavbar";
 import Review from "./pages/Review";
 import SearchProvider from "./contexts/SearchContext";
+import ChatPage from "./pages/Chat";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -34,6 +35,7 @@ const App = () => {
                   <PrivateRoute exact path="/reviews/:id" component={Review} />
                   <PrivateRoute exact path="/trades" component={Trades} />
                   <PrivateRoute exact path="/user/:id" component={Profile} />
+                  <PrivateRoute exact path="/chat" component={ChatPage} />
                 </div>
               </Navbar>
             </Switch>
