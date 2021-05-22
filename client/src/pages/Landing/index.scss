@@ -20,14 +20,15 @@
       text-decoration: none;
       color: white;
       padding: 15px 58px;
-      background: #102037;
-      box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
+      background: var(--bgColor);
+      box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
+        -2.4px -2.4px 9.6px var(--boxShadowInset2);
       margin-top: 25px;
       border-radius: 4px;
       &:active {
         transition: all 0.3s ease-in-out;
-        box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
-          inset -4.8px -4.8px 9.6px #152947;
+        box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+          inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
       }
     }
   }

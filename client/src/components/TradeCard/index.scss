@@ -4,7 +4,7 @@
   width: 440px;
   height: fit-content;
   background: #2c3d55;
-  color: white;
+  color: var(--textColor);
   border-radius: 4px;
   .head {
     display: flex;
@@ -23,7 +23,7 @@
         font-size: 24px;
       }
       a {
-        color: white;
+        color: var(--textColor);
         font-size: 14px;
       }
       span {
@@ -35,7 +35,7 @@
       border-radius: 4px;
       height: 45px;
       width: 115px;
-      color: white;
+      color: var(--textColor);
       font-weight: bold;
       font-size: 17px;
     }
@@ -50,7 +50,7 @@
     a {
       font-weight: bold;
       padding: 5px;
-      color: white;
+      color: var(--textColor);
     }
   }
 }

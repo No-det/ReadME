@@ -21,6 +21,7 @@
   }
 }
 .chatRoom {
+  transition: ease-in-out 3s;
   .cHead {
     display: flex;
     align-items: center;
@@ -50,8 +51,8 @@
     align-items: center;
     height: 4vh;
     border-radius: 4px;
-    background-color: white;
-    color: black;
+    background-color: var(--textColor);
+    color: var(--bgColor);
     margin: 10px 20px;
     padding: 0 10px;
     input {
@@ -60,6 +61,7 @@
       outline: none;
       border: none;
       padding: 0 10px;
+      background-color: transparent;
     }
     img {
       height: 35px;

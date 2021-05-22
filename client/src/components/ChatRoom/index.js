@@ -67,7 +67,7 @@ const ChatRoom = ({ receiver }) => {
               )
             )
           ) : (
-            <p style={{ textAlign: "center" }}>
+            <p className="chatEmptyMessage">
               Send a message to start the conversation
             </p>
           )}

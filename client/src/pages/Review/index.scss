@@ -65,7 +65,7 @@
   width: 100%;
   position: absolute;
   top: 140px;
-  background: #102037;
+  background: var(--bgColor);
 }
 #disqus_thread:after {
   content: "";
@@ -74,7 +74,7 @@
   width: 100%;
   position: absolute;
   bottom: 0;
-  background: #102037;
+  background: var(--bgColor);
 }
 
 #disqus_thred #main-nav {

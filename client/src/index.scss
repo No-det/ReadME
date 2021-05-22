@@ -7,6 +7,20 @@
   box-sizing: border-box;
   text-decoration: none;
 }
+.darkMode {
+  --bgColor: #102037;
+  --textColor: #ffffff;
+  --boxShadowInset1: #0b1727;
+  --boxShadowInset2: #152947;
+}
+// box-shadow: inset 1.4px 1.4px 9.6px #0b1727,
+// inset -1.4px -1.4px 9.6px #152947;
+.lightMode {
+  --bgColor: #ffffff;
+  --textColor: #102037;
+  --boxShadowInset1: #858585;
+  --boxShadowInset2: #ffffff;
+}
 
 button {
   border: none;
@@ -19,8 +33,9 @@ body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #102037;
-  color: white !important;
+  background-color: var(--bgColor);
+  color: var(--textColor) !important;
+  transition: ease-in-out 0.3s;
 }
 
 h1,
@@ -30,7 +45,7 @@ h4,
 h5,
 h6,
 p {
-  color: white;
+  color: var(--textColor);
   margin: 0;
 }
 
@@ -47,53 +62,54 @@ code {
 .ant-drawer-content,
 .ant-drawer-header {
   border: none;
-  background-color: #102037 !important;
+  background-color: var(--bgColor) !important;
   .ant-form-item .ant-input-textarea-show-count::after {
-    color: white;
+    color: var(--textColor);
   }
   .anticon-close {
-    color: white;
+    color: var(--textColor);
   }
 
   .ant-drawer-title {
-    color: white !important;
+    color: var(--textColor) !important;
     font-size: 20px;
     font-weight: 700;
   }
   .ant-form-item-label > label {
-    color: white !important;
+    color: var(--textColor) !important;
   }
 
   .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    background-color: #102037 !important;
-    color: white;
+    background-color: var(--bgColor) !important;
+    color: var(--textColor);
     border: none;
     outline: none;
-    box-shadow: inset 1.4px 1.4px 9.6px #0b1727,
-      inset -1.4px -1.4px 9.6px #152947;
+    box-shadow: inset 1.4px 1.4px 9.6px var(--boxShadowInset1),
+      inset -1.4px -1.4px 9.6px var(--boxShadowInset2);
     &:hover {
-      background-color: #102037;
-      color: white;
+      background-color: var(--bgColor);
+      color: var(--textColor);
     }
   }
 
   .ant-input {
-    background-color: #102037;
-    color: white;
+    background-color: var(--bgColor);
+    color: var(--textColor);
     border: none;
     outline: none;
     padding: 10px 20px;
-    box-shadow: inset 1.4px 1.4px 9.6px #0b1727,
-      inset -1.4px -1.4px 9.6px #152947;
+    box-shadow: inset 1.4px 1.4px 9.6px var(--boxShadowInset1),
+      inset -1.4px -1.4px 9.6px var(--boxShadowInset2);
     &:hover {
-      background-color: #102037;
-      color: white;
+      background-color: var(--bgColor);
+      color: var(--textColor);
     }
   }
   .ant-btn {
-    background-color: #102037;
+    background-color: var(--bgColor);
     outline: none;
-    box-shadow: 4.8px 4.8px 9.6px #0b1727, -4.8px -4.8px 9.6px #152947;
+    box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
+      -4.8px -4.8px 9.6px var(--boxShadowInset2);
     border: none;
     margin: 10px 0;
     padding: 0 40px;
@@ -101,8 +117,8 @@ code {
     align-items: center;
     justify-content: center;
     &:active {
-      box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
-        inset -4.8px -4.8px 9.6px #152947;
+      box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+        inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
     }
   }
 }

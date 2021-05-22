@@ -75,7 +75,7 @@ const Trades = () => {
   return (
     <div className="trades">
       <div className="trades-head">
-        <h2 style={{ color: isDarkTheme ? "#2C3D55" : "#FFFFFF" }}>Trade</h2>
+        <h2 style={{ color: isDarkTheme ? "#FFFFFF" : "#2C3D55" }}>Trade</h2>
         <div className="posterHead">
           <div className="addResBtn" onClick={() => setDrawerVisibility(true)}>
             <img className="salt" src={PlusIcon} alt="plusIcon" />

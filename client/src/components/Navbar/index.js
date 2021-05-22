@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Form, Input } from "antd";
+import { Form, Input, Switch } from "antd";
 
 import Logo from "../../assets/logoME.svg";
 import Search from "../../assets/search.svg";
@@ -12,12 +12,14 @@ import "./index.scss";
 import debounce from "lodash/debounce";
 import { SearchContext } from "../../contexts/SearchContext";
 import Genre from "../Genre";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 const Navbar = ({ children }) => {
   const history = useHistory();
   const { user, reviews } = useContext(AuthContext);
   const [search, setSearch] = useState("");
   const { setSearchResults, setIsSearching } = useContext(SearchContext);
+  const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
 
   const [form] = Form.useForm();
 
@@ -56,15 +58,26 @@ const Navbar = ({ children }) => {
     []
   );
 
+  const toggleTheme = () => {
+    if (document.body.className.includes("darkMode"))
+      document.body.classList.replace("darkMode", "lightMode");
+    else document.body.classList.replace("lightMode", "darkMode");
+  };
+
   return (
     <>
       <div className="navMain">
-        <Link to="/">
-          <div className="logoContainer">
-            <img src={Logo} alt="logo" />
-            <h2>readMe</h2>
+        <span className="navMainLogo">
+          <Link to="/">
+            <div className="logoContainer">
+              <img src={Logo} alt="logo" />
+              <h2>readMe</h2>
+            </div>
+          </Link>
+          <div className="navToggleTheme">
+            <Switch defaultChecked onChange={toggleTheme} />
           </div>
-        </Link>
+        </span>
         {user ? (
           <Form className="actionContainer">
             <Form.Item name="genre">

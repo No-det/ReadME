@@ -8,10 +8,11 @@
   left: 50%;
   z-index: 999;
   transform: translateX(-50%);
-  background: #102037;
-  box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
+  background: var(--bgColor);
+  box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
+    -2.4px -2.4px 9.6px var(--boxShadowInset2);
   .navLink {
-    color: white;
+    color: var(--textColor);
     flex: 1;
     display: flex;
     justify-content: center;
@@ -19,15 +20,15 @@
     padding: 10px 20px;
     cursor: pointer;
     &:active {
-      background: #102037;
-      box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
-        inset -2.4px -2.4px 9.6px #152947;
+      background: var(--bgColor);
+      box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+        inset -2.4px -2.4px 9.6px var(--boxShadowInset2);
     }
   }
   .selected {
     transition: all 0.5s ease-in-out;
-    background: #102037;
-    box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
-      inset -2.4px -2.4px 9.6px #152947;
+    background: var(--bgColor);
+    box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+      inset -2.4px -2.4px 9.6px var(--boxShadowInset2);
   }
 }

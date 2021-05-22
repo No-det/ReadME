@@ -2,15 +2,12 @@ import "./index.scss";
 import ChatTile from "./ChatTile";
 import ChatRoom from "../../components/ChatRoom";
 import Search from "../../assets/search.svg";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const ChatPage = () => {
   const { user } = useContext(AuthContext);
   const [selectedReceiver, setSelectedReceiver] = useState({});
-  useEffect(() => {
-    console.log(selectedReceiver);
-  }, [selectedReceiver]);
   return (
     <div className="chatPage">
       <div className="chatSelect">
@@ -28,7 +25,7 @@ const ChatPage = () => {
                 />
               ))
             ) : (
-              <p style={{ textAlign: "center" }}>
+              <p className="chatEmptyMessage">
                 Follow some users to start a conversation
               </p>
             )}
@@ -39,7 +36,7 @@ const ChatPage = () => {
         {Object.keys(selectedReceiver).length > 0 ? (
           <ChatRoom receiver={selectedReceiver} />
         ) : (
-          <p style={{ textAlign: "center", marginTop: "40%" }}>
+          <p className="chatEmptyMessage">
             Select a follower to start the conversation
           </p>
         )}

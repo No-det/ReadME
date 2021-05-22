@@ -14,7 +14,7 @@
         font-weight: 600;
         font-size: 36px;
         line-height: 43px;
-        color: #ffffff;
+        color: var(--textColor);
       }
     }
 
@@ -55,7 +55,7 @@
           font-weight: bold;
           font-size: 36px;
           line-height: 43px;
-          color: #ffffff;
+          color: var(--textColor);
         }
 
         .tradeBtn {
@@ -66,7 +66,7 @@
           cursor: pointer;
           width: 163px;
           height: 47px;
-          background: #ffffff;
+          background: var(--textColor);
           border-radius: 4px;
           font-style: normal;
           font-weight: 500;
@@ -96,7 +96,8 @@
         width: 200px;
         height: 44px;
         border-radius: 4px;
-        box-shadow: 4.8px 4.8px 9.6px #0b1727, -2.4px -2.4px 9.6px #152947;
+        box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
+          -2.4px -2.4px 9.6px var(--boxShadowInset2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -104,7 +105,7 @@
         font-weight: bold;
         font-size: 18px;
         line-height: 22px;
-        color: #ffffff;
+        color: var(--textColor);
         cursor: pointer;
 
         img {
@@ -113,8 +114,8 @@
 
         &:active {
           transition: all 0.3s ease-in-out;
-          box-shadow: inset 4.8px 4.8px 9.6px #0b1727,
-            inset -4.8px -4.8px 9.6px #152947;
+          box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+            inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
         }
       }
     }
