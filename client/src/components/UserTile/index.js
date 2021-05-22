@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
 import "./index.scss";
 
 const UserTile = ({ user, title, followers }) => {
   return (
-    <div className="followTile">
-      {console.log(followers)}
+    <Link to={`/user/${user?.uid}`} className="followTile">
       <div className="followImage">
         <img src={user?.photoURL} alt={user?.name?.charAt(0)} />
       </div>
@@ -19,7 +19,7 @@ const UserTile = ({ user, title, followers }) => {
             <button>Follow</button>
           ))}
       </div>
-    </div>
+    </Link>
   );
 };
 
