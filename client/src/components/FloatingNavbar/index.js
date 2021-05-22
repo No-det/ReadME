@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import dragIcon from "../../assets/move.svg";
+import { AuthContext } from "../../contexts/AuthContext";
 // import Draggable from "react-draggable";
 
 import "./index.scss";
 
 const FloatingNavbar = ({ location }) => {
   const [selected, setSelected] = useState(0);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     if (location.pathname === "/trades") setSelected(1);
@@ -36,7 +38,7 @@ const FloatingNavbar = ({ location }) => {
         <div>Trades</div>
       </Link>
       <Link
-        to="/profile"
+        to={`/profile/${user.uid}`}
         className={`navLink ${selected === 2 && "selected"}`}
         onClick={() => setSelected(2)}
       >

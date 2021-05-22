@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 import { addReviewPost, getReviews } from "../../api/review";
-import { getUser } from "../../api/auth";
+import { SearchContext } from "../../contexts/SearchContext";
 
 const { TextArea } = Input;
 
@@ -18,11 +18,11 @@ const Reviews = () => {
   const [submitting, setSubmitting] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [form] = Form.useForm();
+  const { searchResults, isSearching } = useContext(SearchContext);
 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    getUser(user.uid).then((data) => console.log(data));
     getReviews(user.uid)
       .then((reviews) => {
         setReviews(reviews.reviews);
@@ -65,7 +65,15 @@ const Reviews = () => {
         <div className="reviewHead">
           <h3>Reviews</h3>
           <div className="cardCont">
-            {reviews?.length > 0 ? (
+            {isSearching ? (
+              searchResults?.length > 0 ? (
+                searchResults?.map((search) => <ReviewCard review={search} />)
+              ) : (
+                <div className="reviewLoading">
+                  <h3>No search results</h3>
+                </div>
+              )
+            ) : reviews?.length > 0 ? (
               reviews?.map((review) => <ReviewCard review={review} />)
             ) : (
               <div className="reviewLoading">

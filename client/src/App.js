@@ -13,6 +13,7 @@ import AuthProvider, { AuthContext } from "./contexts/AuthContext";
 import ThemeProvider from "./contexts/ThemeContext";
 import FloatingNavbar from "./components/FloatingNavbar";
 import Review from "./pages/Review";
+import SearchProvider from "./contexts/SearchContext";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -22,20 +23,22 @@ const App = () => {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <BrowserRouter>
-          <Switch>
-            <Navbar>
-              <FloatingNavbar />
-              <div className="container">
-                <PublicRoute exact path="/" component={Landing} />
-                <PrivateRoute exact path="/reviews" component={Reviews} />
-                <PrivateRoute exact path="/reviews/:id" component={Review} />
-                <PrivateRoute exact path="/trades" component={Trades} />
-                <PrivateRoute exact path="/user/:id" component={Profile} />
-              </div>
-            </Navbar>
-          </Switch>
-        </BrowserRouter>
+        <SearchProvider>
+          <BrowserRouter>
+            <Switch>
+              <Navbar>
+                <FloatingNavbar />
+                <div className="container">
+                  <PublicRoute exact path="/" component={Landing} />
+                  <PrivateRoute exact path="/reviews" component={Reviews} />
+                  <PrivateRoute exact path="/reviews/:id" component={Review} />
+                  <PrivateRoute exact path="/trades" component={Trades} />
+                  <PrivateRoute exact path="/user/:id" component={Profile} />
+                </div>
+              </Navbar>
+            </Switch>
+          </BrowserRouter>
+        </SearchProvider>
       </ThemeProvider>
     </AuthProvider>
   );

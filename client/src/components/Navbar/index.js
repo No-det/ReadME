@@ -10,6 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { signInWithGoogle } from "../../firebase/firebase";
 import "./index.scss";
 import debounce from "lodash/debounce";
+import { SearchContext } from "../../contexts/SearchContext";
 
 const { Option } = Select;
 
@@ -17,7 +18,7 @@ const Navbar = ({ children }) => {
   const history = useHistory();
   const { user, reviews } = useContext(AuthContext);
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const { setSearchResults, setIsSearching } = useContext(SearchContext);
 
   const signIn = async () => {
     try {
@@ -31,10 +32,12 @@ const Navbar = ({ children }) => {
   const onChange = ({ target }) => {
     setSearch(target.value);
     debounceSearch(target.value);
+    if (!target.value) setIsSearching(false);
+    else setIsSearching(true);
   };
 
   const searchReviews = (value) => {
-    let newSearch = reviews.filter((review) =>
+    let newSearch = reviews?.filter((review) =>
       review.bookName.toLowerCase().includes(value.toLowerCase())
     );
     setSearchResults(newSearch);
