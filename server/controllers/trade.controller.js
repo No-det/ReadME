@@ -31,10 +31,10 @@ exports.getTrades = async (req, res) => {
     .then((user) => {
       if (user) {
         if (user.following.length > 0) {
-          user.following.map((follower_id) => {
-            Trade.find({ uid: follower_id }).then((trade) =>
-              trades.push(trade)
-            );
+          user.following.map((followingUser) => {
+            Trade.find({ uid: followingUser.uid }).then((trade) => {
+              trades.push(...trade);
+            });
           });
           if (trades.length < 20) {
             //  If the number of trades are less than 20
@@ -44,12 +44,16 @@ exports.getTrades = async (req, res) => {
               .then((allTrades) => {
                 trades = [...trades, allTrades];
                 trades.filter((val, i) => trades.indexOf(val) === i);
+                return res.status(200).json({
+                  success: true,
+                  trades: trades,
+                });
               });
-          }
-          return res.status(200).json({
-            success: true,
-            trades: trades,
-          });
+          } else
+            return res.status(200).json({
+              success: true,
+              trades: trades,
+            });
         } else {
           Trade.find({})
             // .sort({ createdAt: -1 }) // Uncomment after createdAt is added

@@ -51,8 +51,9 @@ const Profile = (props) => {
             }
           })
           .catch((err) => {
-            if (err.message) {
-              message.error(err.message);
+            console.log(err);
+            if (err?.message) {
+              message.error(err?.message);
               setFetchedData(true);
             }
           });
@@ -65,7 +66,7 @@ const Profile = (props) => {
     }
   }, [user, props]);
 
-  const reviews = (uid, data) => {
+  const reviews = (uid) => {
     getReviewTrades(uid)
       .then((data) => {
         if (data.success) {
@@ -76,7 +77,7 @@ const Profile = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        message.error(err.message);
+        message.error(err?.message);
       });
   };
 
@@ -118,6 +119,7 @@ const Profile = (props) => {
   };
 
   const followUser = () => {
+    setIsSubmitting(true);
     const payload = {
       uid: props?.match?.params?.id,
       name: profileData?.displayName,
@@ -132,10 +134,12 @@ const Profile = (props) => {
             message.success("Success");
           }
         }
+        setIsSubmitting(false);
       })
       .catch((err) => {
         console.log(err);
         message.error(err.data.message);
+        setIsSubmitting(false);
       });
   };
 
@@ -178,15 +182,21 @@ const Profile = (props) => {
                 <p>{profileData?.bio}</p>
               </span>
               {myProfile ? (
-                <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+                <Button size="large" onClick={() => setIsEditing(true)}>
+                  Edit Profile
+                </Button>
               ) : (
-                <button onClick={followUser}>
+                <Button
+                  size="large"
+                  onClick={followUser}
+                  loading={isSubmitting}
+                >
                   {profileData.followers.filter((e) => e.uid === user.uid)
                     .length > 0
                     ? "Unfollow"
                     : "Follow"}{" "}
                   User
-                </button>
+                </Button>
               )}
             </div>
             <div className="mobileFollowContainer">

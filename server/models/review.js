@@ -5,7 +5,7 @@ const CommentSchema = require("./comment").schema;
 
 const ReviewSchema = new Schema({
   uid: { type: String, required: true },
-  displayName: { type: String, required: true },
+  displayName: { type: String, required: false },
   bookName: { type: String, required: true },
   ISBNNumber: { type: String, required: true },
   author: { type: String, required: true },
@@ -18,7 +18,7 @@ const ReviewSchema = new Schema({
   comments: [CommentSchema],
   rating: { type: Number, required: true, default: 0 },
   createdAt: { type: Date, default: Date.now },
-  upvotes: [{ type: String, require: false }],
+  upvotes: [{ type: String, required: false }],
 });
 
 module.exports = mongoose.model("review", ReviewSchema);
