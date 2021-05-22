@@ -11,6 +11,7 @@ import { signInWithGoogle } from "../../firebase/firebase";
 import "./index.scss";
 import debounce from "lodash/debounce";
 import { SearchContext } from "../../contexts/SearchContext";
+import Genre from "../Genre";
 
 const { Option } = Select;
 
@@ -60,11 +61,7 @@ const Navbar = ({ children }) => {
         </Link>
         {user ? (
           <div className="actionContainer">
-            <Select placeholder="Select Genre">
-              <Option key="1">One</Option>
-              <Option key="2">Two</Option>
-              <Option key="3">One</Option>
-            </Select>
+            <Genre />
             <Input
               className="customInputSearch"
               type="text"
