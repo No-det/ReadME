@@ -4,7 +4,11 @@
 
 .profileTradeContainer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  div {
+    margin: 5px;
+  }
 }
 
 .noProfileItems {

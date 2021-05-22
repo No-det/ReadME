@@ -14,8 +14,9 @@ const FloatingNavbar = ({ location }) => {
   useEffect(() => {
     if (location.pathname === "/trades") setSelected(1);
     else if (location.pathname === "/reviews") setSelected(0);
-    else if (location.pathname === "/profile") setSelected(2);
-  }, [location]);
+    else if (location.pathname === `/user/${user.uid}`) setSelected(2);
+    else setSelected(-1);
+  }, [user, location]);
 
   return (
     // <Draggable>
@@ -38,7 +39,7 @@ const FloatingNavbar = ({ location }) => {
         <div>Trades</div>
       </Link>
       <Link
-        to={`/profile/${user.uid}`}
+        to={`/user/${user.uid}`}
         className={`navLink ${selected === 2 && "selected"}`}
         onClick={() => setSelected(2)}
       >

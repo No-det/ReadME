@@ -44,7 +44,8 @@ const Profile = (props) => {
           .then((data) => {
             if (data.success) {
               setProfileData(data.user);
-              reviews(data.user.uid);
+              setProfileReviews(data.user.reviews);
+              setProfileTrades(data.user.trades);
               setFetchedData(true);
             }
           })
@@ -63,7 +64,7 @@ const Profile = (props) => {
     }
   }, [user, props]);
 
-  const reviews = (uid) => {
+  const reviews = (uid, data) => {
     getReviewTrades(uid)
       .then((data) => {
         if (data.success) {
