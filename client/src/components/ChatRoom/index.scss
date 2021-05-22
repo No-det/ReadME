@@ -29,6 +29,7 @@
     img {
       width: 75px;
       height: 75px;
+      border-radius: 500px;
     }
     h3 {
       font-weight: 600;
@@ -58,11 +59,11 @@
       height: 100%;
       outline: none;
       border: none;
-      background-color: transparent;
       padding: 0 10px;
     }
     img {
       height: 35px;
+      padding: 1px 0;
       cursor: pointer;
     }
   }

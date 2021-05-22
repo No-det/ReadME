@@ -32,10 +32,11 @@
       }
     }
     .chatListWrapper {
-      overflow-x: auto;
+      overflow-y: auto;
       width: 100%;
       height: 70vh;
       .chatList {
+        padding-top: 10px;
         .chatTile {
           display: flex;
           cursor: pointer;
@@ -43,8 +44,9 @@
           border-bottom: 1px solid rgb(0, 44, 88);
           padding: 10px;
           img {
-            width: 75px;
-            height: 75px;
+            width: 65px;
+            height: 65px;
+            border-radius: 500px;
           }
           h4 {
             font-weight: 600;

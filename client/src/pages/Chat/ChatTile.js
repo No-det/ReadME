@@ -1,12 +1,16 @@
 import "./index.scss";
-import demoDp from "../../assets/demoDP.png";
+import defaultDp from "../../assets/defaultDP.png";
 
-const ChatTile = () => {
+const ChatTile = ({ onClick, userData }) => {
   return (
-    <div className="chatTile">
-      <img src={demoDp} alt="dp" />
+    <div className="chatTile" onClick={onClick}>
+      <img
+        src={userData?.photoURL}
+        onError={(e) => (e.target.src = defaultDp)}
+        alt="dp"
+      />
       <span>
-        <h4>Abhinav</h4>
+        <h4>{userData?.name}</h4>
         <p>
           Last message will be displayed here in black color and a medium font
           weight and with a good font size.

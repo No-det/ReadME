@@ -1,9 +1,11 @@
-import firebase from "firebase/app";
+import firebase from "firebase";
 import "firebase/auth";
 
-firebase.initializeApp({
+const app = firebase.initializeApp({
   apiKey: "AIzaSyBlQ6FFB9OryiGo3cFkwErWaORMT__Yxq0",
   authDomain: "readme-nodet.firebaseapp.com",
+  databaseURL:
+    "https://readme-nodet-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "readme-nodet",
   storageBucket: "readme-nodet.appspot.com",
   messagingSenderId: "670378586734",
@@ -12,6 +14,7 @@ firebase.initializeApp({
 });
 
 export const auth = firebase.auth();
+export const db = app.database();
 export default firebase;
 
 // Setting up google auth provider

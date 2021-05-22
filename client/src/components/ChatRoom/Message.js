@@ -1,13 +1,10 @@
 import "./index.scss";
 
-const Message = ({ incoming = false, outgoing = false }) => {
+const Message = ({ incoming = false, outgoing = false, message = "" }) => {
   return (
     <div className={`chatMsg ${incoming ? "msgIncoming" : "msgOutgoing"}`}>
-      <small>23:34</small>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+      <small>{message.time}</small>
+      <p>{message.content}</p>
     </div>
   );
 };
