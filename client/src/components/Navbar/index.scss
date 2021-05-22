@@ -18,12 +18,18 @@
   .actionContainer {
     display: flex;
     align-items: stretch;
+    .ant-form-item-control-input,
+    .ant-form-item-control-input-content,
+    .ant-select {
+      height: 100%;
+    }
+
     .ant-select-selector {
       display: flex;
       align-items: center;
-      height: 100%;
+      height: 100% !important;
+      min-width: 200px;
       outline: none;
-      width: 120px;
       border-radius: 4px;
 
       .ant-select-selection-placeholder,

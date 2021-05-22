@@ -3,6 +3,8 @@ import { Drawer, Input, Form, Button, message } from "antd";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 import TradeCard from "../../components/TradeCard";
+import Genre from "../../components/Genre";
+
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -36,6 +38,12 @@ const Trades = () => {
 
     asyncFunction();
   }, []);
+
+  const handleFormChange = (value) => {
+    form.setFieldsValue({
+      genre: value,
+    });
+  };
 
   const addTrade = async (values) => {
     setSubmitting(true);
@@ -133,15 +141,11 @@ const Trades = () => {
             rules={[
               {
                 required: true,
-                message: "Please enter the genre of the book",
+                message: "Please select the genre of the book",
               },
             ]}
           >
-            <Input
-              size="large"
-              maxLength={150}
-              placeholder="Enter the name of the book"
-            />
+            <Genre handleFormChange={handleFormChange} />
           </Form.Item>
           <Form.Item
             label="Description"

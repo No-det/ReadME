@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Input } from "antd";
+import { Form, Input } from "antd";
 
 import Logo from "../../assets/logoME.svg";
 import Search from "../../assets/search.svg";
@@ -19,6 +19,8 @@ const Navbar = ({ children }) => {
   const [search, setSearch] = useState("");
   const { setSearchResults, setIsSearching } = useContext(SearchContext);
 
+  const [form] = Form.useForm();
+
   const signIn = async () => {
     try {
       const result = await signInWithGoogle();
@@ -26,6 +28,12 @@ const Navbar = ({ children }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleFormChange = (value) => {
+    form.setFieldsValue({
+      genre: value,
+    });
   };
 
   const onChange = ({ target }) => {
@@ -58,20 +66,24 @@ const Navbar = ({ children }) => {
           </div>
         </Link>
         {user ? (
-          <div className="actionContainer">
-            <Genre />
-            <Input
-              className="customInputSearch"
-              type="text"
-              placeholder="Search for a book"
-              onChange={onChange}
-              allowClear
-              value={search}
-            />
+          <Form className="actionContainer">
+            <Form.Item name="genre">
+              <Genre handleFormChange={handleFormChange} />
+            </Form.Item>
+            <Form.Item name="search">
+              <Input
+                className="customInputSearch"
+                type="text"
+                placeholder="Search for a book"
+                onChange={onChange}
+                allowClear
+                value={search}
+              />
+            </Form.Item>
             <div className="searchBtn">
               <img src={Search} alt="search icon" />
             </div>
-          </div>
+          </Form>
         ) : (
           <div className="googleButton" onClick={signIn}>
             <img src={googleIcon} alt="G" />

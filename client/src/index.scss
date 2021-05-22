@@ -63,6 +63,20 @@ code {
   .ant-form-item-label > label {
     color: white !important;
   }
+
+  .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background-color: #102037 !important;
+    color: white;
+    border: none;
+    outline: none;
+    box-shadow: inset 1.4px 1.4px 9.6px #0b1727,
+      inset -1.4px -1.4px 9.6px #152947;
+    &:hover {
+      background-color: #102037;
+      color: white;
+    }
+  }
+
   .ant-input {
     background-color: #102037;
     color: white;

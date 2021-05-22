@@ -1,16 +1,19 @@
-import "./index.scss";
-import PlusIcon from "../../assets/plus.svg";
-import ReviewCard from "../../components/ReviewCard";
-import Saly from "../../assets/saly.svg";
-import { Link } from "react-router-dom";
-import Arrow from "../../assets/arrowCircle.svg";
-import { Button, Drawer, Input, Form, message } from "antd";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { Button, Drawer, Input, Form, message } from "antd";
+
+import ReviewCard from "../../components/ReviewCard";
+import Genre from "../../components/Genre";
 
 import { addReviewPost, getReviews } from "../../api/review";
 import { SearchContext } from "../../contexts/SearchContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
+import PlusIcon from "../../assets/plus.svg";
+import Saly from "../../assets/saly.svg";
+import Arrow from "../../assets/arrowCircle.svg";
+
+import "./index.scss";
 const { TextArea } = Input;
 
 const Reviews = () => {
@@ -34,6 +37,12 @@ const Reviews = () => {
         );
       });
   }, [user.uid]);
+
+  const handleFormChange = (value) => {
+    form.setFieldsValue({
+      genre: value,
+    });
+  };
 
   const addReview = async (values) => {
     setSubmitting(true);
@@ -147,11 +156,7 @@ const Reviews = () => {
               },
             ]}
           >
-            <Input
-              size="large"
-              maxLength={150}
-              placeholder="Enter the name of the book"
-            />
+            <Genre handleFormChange={handleFormChange} />
           </Form.Item>
           <Form.Item
             label="Language"

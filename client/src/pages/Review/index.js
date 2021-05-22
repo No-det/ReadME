@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { DiscussionEmbed } from "disqus-react";
 
 import { getReview } from "../../api/review";
+import { genreMap } from "../../components/Genre/genremap";
 
 import "./index.scss";
 
@@ -62,7 +63,7 @@ const Review = (props) => {
               </p>
               <p>
                 <span>Genre</span>
-                <span>: {review?.genre}</span>
+                <span>: {genreMap[review?.genre]}</span>
               </p>
               <p>
                 <span>ISBN Number</span>

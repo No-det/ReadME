@@ -15,6 +15,7 @@ const FloatingNavbar = ({ location }) => {
     if (location.pathname === "/trades") setSelected(1);
     else if (location.pathname === "/reviews") setSelected(0);
     else if (location.pathname === `/user/${user?.uid}`) setSelected(2);
+    else if (location.pathname === "/chat") setSelected(3);
     else setSelected(-1);
   }, [user, location]);
 
@@ -44,6 +45,13 @@ const FloatingNavbar = ({ location }) => {
         onClick={() => setSelected(2)}
       >
         <div>Profile</div>
+      </Link>
+      <Link
+        to="/chat"
+        className={`navLink ${selected === 3 && "selected"}`}
+        onClick={() => setSelected(3)}
+      >
+        <div>Chat</div>
       </Link>
       <div>
         <img src={dragIcon} alt="drag" id="dragIcon" />

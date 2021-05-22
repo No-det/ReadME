@@ -7,7 +7,7 @@ const ReviewCard = ({ review }) => {
       <div className="overlay">
         <div className="text">
           <div className="heading">{review?.bookName}</div>
-          <p>{review.description}</p>
+          <p>{review.description.trim().slice(0, 100)}...</p>
         </div>
       </div>
       <img src={review.coverImage} alt={review?.bookName} />
