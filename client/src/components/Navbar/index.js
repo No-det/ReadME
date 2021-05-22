@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import { Input, Select } from "antd";
+import { Input } from "antd";
 
 import Logo from "../../assets/logoME.svg";
 import Search from "../../assets/search.svg";
@@ -12,8 +12,6 @@ import "./index.scss";
 import debounce from "lodash/debounce";
 import { SearchContext } from "../../contexts/SearchContext";
 import Genre from "../Genre";
-
-const { Option } = Select;
 
 const Navbar = ({ children }) => {
   const history = useHistory();

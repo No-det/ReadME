@@ -246,20 +246,20 @@ const Reviews = () => {
             />
           </Form.Item>
           <Form.Item
-            label="Description"
+            label="Review"
             name="description"
             rules={[
               {
                 required: true,
-                message: "Please enter some description",
+                message: "Please enter your review on the book",
               },
             ]}
           >
             <TextArea
-              placeholder="Description of what you are looking for to trade with others and what you are trading. Making it short and sweet helps :)"
+              placeholder="Review of the book you have read"
               showCount
               autoSize={{ minRows: 3, maxRows: 5 }}
-              maxLength={200}
+              maxLength={500}
             />
           </Form.Item>
           <Button

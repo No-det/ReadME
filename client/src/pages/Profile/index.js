@@ -7,7 +7,7 @@ import ProfileTrades from "../../components/ProfileTrades";
 import "./index.scss";
 
 import { updateUser, getUser } from "../../api/auth";
-import { getReviewTrades } from "../../api/profile";
+import { follow, getReviewTrades } from "../../api/profile";
 
 import whatsappIcon from "../../assets/whatsapp.svg";
 import telegramIcon from "../../assets/telegram.svg";
@@ -30,7 +30,7 @@ const Profile = (props) => {
 
   const [form] = Form.useForm();
 
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (props?.match?.params?.id) {
@@ -45,6 +45,7 @@ const Profile = (props) => {
             if (data.success) {
               setProfileData(data.user);
               setProfileReviews(data.user.reviews);
+              console.log(data.user);
               setProfileTrades(data.user.trades);
               setFetchedData(true);
             }
@@ -116,6 +117,28 @@ const Profile = (props) => {
     }
   };
 
+  const followUser = () => {
+    const payload = {
+      uid: props?.match?.params?.id,
+      name: profileData?.displayName,
+      email: profileData?.email,
+      photoURL: profileData?.photoURL,
+    };
+    follow(payload)
+      .then((data) => {
+        if (data.success) {
+          if (data.user) {
+            setUser(data.user);
+            message.success("Success");
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(err.data.message);
+      });
+  };
+
   return (
     <div className="profileContainer">
       {Object.keys(profileData)?.length === 0 ? (
@@ -154,8 +177,16 @@ const Profile = (props) => {
                 <small>{profileData?.email}</small>
                 <p>{profileData?.bio}</p>
               </span>
-              {myProfile && (
+              {myProfile ? (
                 <button onClick={() => setIsEditing(true)}>Edit Profile</button>
+              ) : (
+                <button onClick={followUser}>
+                  {profileData.followers.filter((e) => e.uid === user.uid)
+                    .length > 0
+                    ? "Unfollow"
+                    : "Follow"}{" "}
+                  User
+                </button>
               )}
             </div>
             <div className="mobileFollowContainer">

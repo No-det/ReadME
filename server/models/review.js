@@ -5,6 +5,7 @@ const CommentSchema = require("./comment").schema;
 
 const ReviewSchema = new Schema({
   uid: { type: String, required: true },
+  displayName: { type: String, required: true },
   bookName: { type: String, required: true },
   ISBNNumber: { type: String, required: true },
   author: { type: String, required: true },

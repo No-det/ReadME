@@ -16,6 +16,7 @@ const Review = (props) => {
       if (props?.match?.params?.id) {
         try {
           const data = await getReview(props?.match?.params?.id);
+          console.log(data);
           setReview(data.review);
         } catch (err) {
           console.log(err);
@@ -40,12 +41,24 @@ const Review = (props) => {
         <div className="reviewWrapper">
           <div className="reviewContainer">
             <div className="reviewLeftContainer">
-              <img src={review?.coverImage} alt={review?.bookName} />
+              <img
+                src={review?.coverImage}
+                alt={review?.bookName}
+                height="500"
+                width="320"
+              />
             </div>
             <div className="reviewRightContainer">
               <p>
-                <span>Book Name</span>
+                <span>Review of the Book</span>
                 <span>: {review?.bookName}</span>
+              </p>
+              <p>
+                <span>Review written by</span>
+                <span>
+                  :{" "}
+                  <Link to={`/user/${review?.uid}`}>{review?.displayName}</Link>
+                </span>
               </p>
               <p>
                 <span>Genre</span>
