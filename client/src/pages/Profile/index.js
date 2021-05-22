@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Tabs, Drawer, Form, Input, Button, message } from "antd";
+import { Tabs, Drawer, Form, Input, Button, message, Modal } from "antd";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import ProfileReviews from "../../components/ProfileReviews";
@@ -15,6 +15,7 @@ import twitterIcon from "../../assets/twitter.svg";
 import facebookIcon from "../../assets/facebook.svg";
 import defaultIcon from "../../assets/socialMedia.svg";
 import instagramIcon from "../../assets/instagram.svg";
+import UserTile from "../../components/UserTile";
 
 const { TabPane } = Tabs;
 
@@ -27,6 +28,9 @@ const Profile = (props) => {
   const [fetchedData, setFetchedData] = useState(false);
   const [profileReviews, setProfileReviews] = useState([]);
   const [profileTrades, setProfileTrades] = useState([]);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [modalData, setModalData] = useState([]);
+  const [modalTitle, setModalTitle] = useState("Following");
 
   const [form] = Form.useForm();
 
@@ -38,6 +42,8 @@ const Profile = (props) => {
         setMyProfile(true);
         reviews(user.uid);
         setProfileData(user);
+        console.log(user);
+
         setFetchedData(true);
       } else {
         getUser(props?.match?.params?.id)
@@ -143,6 +149,18 @@ const Profile = (props) => {
       });
   };
 
+  const getModalData = (followingOrFollowers) => {
+    if (followingOrFollowers === "following") {
+      console.log(profileData?.following);
+      setModalData(profileData?.following);
+      setModalTitle("Following");
+    } else {
+      setModalData(profileData?.followers);
+      setModalTitle("Followers");
+    }
+    setModalVisibility(true);
+  };
+
   return (
     <div className="profileContainer">
       {Object.keys(profileData)?.length === 0 ? (
@@ -160,11 +178,17 @@ const Profile = (props) => {
             <div className="profileBanner">
               <img src={profileData?.banner} alt="Banner" />
               <div className="followContainer">
-                <div className="following">
+                <div
+                  className="following"
+                  onClick={() => getModalData("following")}
+                >
                   <p>Following</p>
                   <span>{profileData?.following?.length}</span>
                 </div>
-                <div className="followers">
+                <div
+                  className="followers"
+                  onClick={() => getModalData("followers")}
+                >
                   <p>Followers</p>
                   <span>{profileData?.followers?.length}</span>
                 </div>
@@ -200,10 +224,10 @@ const Profile = (props) => {
               )}
             </div>
             <div className="mobileFollowContainer">
-              <p>
+              <p onClick={() => getModalData("following")}>
                 <span>{profileData?.following?.length}</span> Following
               </p>
-              <p>
+              <p onClick={() => getModalData("followers")}>
                 <span>{profileData?.followers?.length}</span> Followers
               </p>
             </div>
@@ -270,6 +294,22 @@ const Profile = (props) => {
           </Button>
         </Form>
       </Drawer>
+      <Modal
+        visible={modalVisibility}
+        onOk={() => setModalVisibility(false)}
+        onCancel={() => setModalVisibility(false)}
+        title={modalTitle}
+        centered
+        footer={false}
+      >
+        {modalData?.map((data) => (
+          <UserTile
+            followers={profileData.followers}
+            title={modalTitle}
+            user={data}
+          />
+        ))}
+      </Modal>
     </div>
   );
 };

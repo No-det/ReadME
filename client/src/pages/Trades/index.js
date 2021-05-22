@@ -28,6 +28,7 @@ const Trades = () => {
     const asyncFunction = async () => {
       try {
         const data = await getTrades();
+        console.log(data);
         if (data.success) setTrades(data.trades);
         console.log(data);
       } catch (error) {

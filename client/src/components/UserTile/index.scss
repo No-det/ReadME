@@ -1,0 +1,33 @@
+.followTile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .followImage {
+    margin-right: 20px;
+    img {
+      border-radius: 50%;
+      height: 60px;
+    }
+  }
+  .followContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    .followName {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .followEmail {
+      font-size: 14px;
+      color: gray;
+    }
+  }
+  .followFollow {
+    button {
+      background-color: #102037;
+      color: white;
+      padding: 10px 20px;
+    }
+  }
+}
