@@ -7,6 +7,7 @@ import { db } from "../../firebase/firebase";
 import { AuthContext } from "../../contexts/AuthContext";
 import { message } from "antd";
 import { scrollToLatest } from "./utils";
+import { Link } from "react-router-dom";
 
 const ChatRoom = ({ receiver }) => {
   const { user } = useContext(AuthContext);
@@ -87,7 +88,9 @@ const ChatRoom = ({ receiver }) => {
   return (
     <div className="chatRoom">
       <div className="cHead">
-        <img src={receiver?.photoURL} alt="dp" />
+        <Link to={`/user/${receiver.uid}`}>
+          <img src={receiver?.photoURL} alt="dp" />
+        </Link>
         <h3>{receiver?.name}</h3>
       </div>
       <div className="cBodyWrapper" id="cBodyWrapper">
@@ -111,6 +114,7 @@ const ChatRoom = ({ receiver }) => {
         <input
           value={msgContent}
           onChange={(e) => setMsgContent(e.target.value)}
+          placeholder="Enter your message..."
         />
         <img src={Search} onClick={sendMessage} alt="search" />
       </div>
