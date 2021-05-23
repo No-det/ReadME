@@ -63,13 +63,14 @@ const Trades = () => {
         if (data?.success) {
           message.success(data.message);
           form.resetFields();
+          setSubmitting(false);
         }
       })
       .catch((err) => {
         console.log(err);
         message.error(err.toString());
+        setSubmitting(false);
       });
-    setSubmitting(false);
   };
 
   return (
