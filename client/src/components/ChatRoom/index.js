@@ -53,7 +53,7 @@ const ChatRoom = ({ receiver }) => {
       scrollToLatest();
     });
     scrollToLatest();
-  }, []);
+  }, [receiver]);
 
   const sendMessage = async () => {
     if (msgContent) {

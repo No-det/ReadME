@@ -15,6 +15,7 @@ import FloatingNavbar from "./components/FloatingNavbar";
 import Review from "./pages/Review";
 import SearchProvider from "./contexts/SearchContext";
 import ChatPage from "./pages/ChatPage";
+import WhoToFollow from "./pages/WhoToFollow";
 
 const App = () => {
   const { user } = useContext(AuthContext);
@@ -36,6 +37,11 @@ const App = () => {
                   <PrivateRoute exact path="/trades" component={Trades} />
                   <PrivateRoute exact path="/user/:id" component={Profile} />
                   <PrivateRoute exact path="/chat" component={ChatPage} />
+                  <PrivateRoute
+                    exact
+                    path="/whotofollow"
+                    component={WhoToFollow}
+                  />
                 </div>
               </Navbar>
             </Switch>
