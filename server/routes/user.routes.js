@@ -12,5 +12,6 @@ router.get(
 router.post("/add", userController.addUser);
 router.post("/update", checkAuth, userController.updateUser);
 router.post("/follow", checkAuth, userController.followUser);
+router.get("/chat/:uid", checkAuth, userController.updateUserChat);
 
 module.exports = router;

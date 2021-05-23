@@ -1,9 +1,12 @@
-import "./index.scss";
+import { Link } from "react-router-dom";
+
 import defaultDp from "../../assets/defaultDP.png";
 
-const ChatTile = ({ onClick, userData }) => {
+import "./index.scss";
+
+const ChatTile = ({ userData }) => {
   return (
-    <div className="chatTile" onClick={onClick}>
+    <Link to={`/chat/${userData.uid}`} className="chatTile">
       <img
         src={userData?.photoURL}
         onError={(e) => (e.target.src = defaultDp)}
@@ -16,7 +19,7 @@ const ChatTile = ({ onClick, userData }) => {
           weight and with a good font size.
         </p>
       </span>
-    </div>
+    </Link>
   );
 };
 

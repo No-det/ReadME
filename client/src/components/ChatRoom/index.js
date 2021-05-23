@@ -1,5 +1,6 @@
 import "./index.scss";
-import demoDp from "../../assets/demoDP.png";
+import defaultDp from "../../assets/defaultDP.png";
+
 import Message from "./Message";
 import Search from "../../assets/telegram.svg";
 import { useContext, useEffect, useState } from "react";
@@ -9,9 +10,11 @@ import { message } from "antd";
 import { scrollToLatest } from "./utils";
 
 const ChatRoom = ({ receiver }) => {
-  const { user } = useContext(AuthContext);
   const [msgContent, setMsgContent] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+
+  const { user } = useContext(AuthContext);
+
   const dbref = db.ref(`messages`);
 
   const checkRoom = (msg) => {
@@ -38,18 +41,23 @@ const ChatRoom = ({ receiver }) => {
           if (snap.val()) {
             Object.keys(snap.val()).map((msgId) => {
               if (checkRoom(snap.val()[msgId])) {
-                setChatHistory((prev) => [...prev, snap.val()[msgId]]);
+                setChatHistory((prev) => [
+                  ...prev,
+                  { id: msgId, ...snap.val()[msgId] },
+                ]);
               }
             });
           }
         }
       })
       .catch((error) => {
-        message.error("Error in fetching messages ! Please try again later.");
+        message.error("Error in fetching messages! Please try again later.");
       });
     dbref.on("child_added", (snap) => {
-      if (checkRoom(snap.val()))
+      if (checkRoom(snap.val())) {
         setChatHistory((prev) => [...prev, snap.val()]);
+        // setChatHistory((prev) => [...prev, snap.val()]);
+      }
       scrollToLatest();
     });
     scrollToLatest();
@@ -87,7 +95,11 @@ const ChatRoom = ({ receiver }) => {
   return (
     <div className="chatRoom">
       <div className="cHead">
-        <img src={receiver?.photoURL} alt="dp" />
+        <img
+          src={receiver?.photoURL}
+          alt="dp"
+          onError={(e) => (e.target.src = defaultDp)}
+        />
         <h3>{receiver?.name}</h3>
       </div>
       <div className="cBodyWrapper" id="cBodyWrapper">

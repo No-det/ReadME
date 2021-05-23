@@ -11,3 +11,7 @@ export const updateUser = (data) => {
 export const getUser = (uid) => {
   return get(`/user/${uid}`);
 };
+
+export const updateChatMembers = (uid) => {
+  return get(`/user/chat/${uid}`);
+};

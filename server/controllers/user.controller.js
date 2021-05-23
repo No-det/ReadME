@@ -79,9 +79,11 @@ exports.followUser = async (req, res) => {
 
     const user = await User.findOne({ uid: req.uid });
     let finalUsers = [];
+    let finalChats = [];
 
     if (user) {
       const following = user.following;
+      const chats = user.chats;
 
       const filteredUser = following.filter(
         (following) => following.uid !== uid
@@ -89,13 +91,15 @@ exports.followUser = async (req, res) => {
 
       if (filteredUser.length === following.length) {
         finalUsers = [...following, req.body];
+        finalChats = [...chats, req.body];
       } else {
         finalUsers = filteredUser;
+        finalChats = chats;
       }
 
       const UpdatedUser = await User.findOneAndUpdate(
         { uid: req.uid },
-        { following: finalUsers },
+        { following: finalUsers, chats: finalChats },
         { new: true }
       );
 
@@ -107,9 +111,21 @@ exports.followUser = async (req, res) => {
 
         if (otherUser) {
           const followers = otherUser.followers;
+          const otherChats = otherUser.chats;
           const filteredOtherUser = followers.filter(
             (followers) => followers.uid !== req.uid
           );
+          if (chats.filter((chat) => chat.uid === req.uid).length === 0) {
+            finalOtherChats = [
+              ...otherChats,
+              {
+                uid: UpdatedUser.uid,
+                name: UpdatedUser.displayName,
+                photoURL: UpdatedUser.photoURL,
+                email: UpdatedUser.email,
+              },
+            ];
+          }
 
           if (filteredOtherUser.length === followers.length) {
             finalFollowers = [
@@ -123,11 +139,12 @@ exports.followUser = async (req, res) => {
             ];
           } else {
             finalFollowers = filteredOtherUser;
+            finalOtherChats = otherChats;
           }
 
           const UpdatedOtherUser = await User.findOneAndUpdate(
             { uid: uid },
-            { followers: finalFollowers },
+            { followers: finalFollowers, chats: finalOtherChats },
             { new: true }
           );
 
@@ -212,4 +229,75 @@ exports.getProfileReviewsTrades = async (req, res) => {
         "Some error occured while fetching the reviews and trades of the user. Please try again after sometime",
     });
   }
+};
+
+exports.updateUserChat = (req, res) => {
+  User.findOne({ uid: req.uid })
+    .then(async (user) => {
+      if (user) {
+        const userDetails = {
+          uid: user.uid,
+          photoURL: user.photoURL,
+          name: user.displayName,
+        };
+        if (
+          user.chats.filter((userId) => userId.uid === req.params.uid).length >
+          0
+        ) {
+          await user.populate("trades").execPopulate();
+          await user.populate("reviews").execPopulate();
+          return res.status(200).json({
+            success: true,
+            user: user,
+          });
+        } else {
+          const otherUser = await User.findOne({ uid: req.params.uid });
+          const newChat = [
+            ...user.chats,
+            {
+              uid: req.params.uid,
+              name: otherUser.displayName,
+              photoURL: otherUser.photoURL,
+            },
+          ];
+          const updatedUser = await User.findOneAndUpdate(
+            { uid: req.uid },
+            { chats: newChat },
+            { new: true }
+          );
+          await user.populate("trades").execPopulate();
+          await user.populate("reviews").execPopulate();
+          res.status(200).json({
+            success: true,
+            user: updatedUser,
+          });
+          User.findOne({ uid: req.params.uid }).then(async (user) => {
+            if (user) {
+              if (
+                user.chats.filter((userId) => userId.uid === req.uid).length ===
+                0
+              ) {
+                const newOtherChat = [...user.chats, userDetails];
+                const updatedOtherUser = await User.findOneAndUpdate(
+                  { uid: req.params.uid },
+                  { chats: newOtherChat }
+                );
+              }
+            }
+          });
+        }
+      } else {
+        return res.status(404).json({
+          success: false,
+          message: "User doesn't exist",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+        message: "Some error occured",
+      });
+    });
 };

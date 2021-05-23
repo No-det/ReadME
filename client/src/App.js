@@ -37,6 +37,7 @@ const App = () => {
                   <PrivateRoute exact path="/trades" component={Trades} />
                   <PrivateRoute exact path="/user/:id" component={Profile} />
                   <PrivateRoute exact path="/chat" component={ChatPage} />
+                  <PrivateRoute exact path="/chat/:uid" component={ChatPage} />
                   <PrivateRoute
                     exact
                     path="/whotofollow"
