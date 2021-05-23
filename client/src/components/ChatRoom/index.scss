@@ -1,19 +1,21 @@
 .chatMsg {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
   p {
     width: 70%;
     border-radius: 4px;
     padding: 10px 15px;
   }
 }
-.msgIncoming {
+.msgOutgoing {
   align-items: flex-end;
   p {
     background-color: rgb(0, 42, 83);
+    color: white;
   }
 }
-.msgOutgoing {
+.msgIncoming {
   align-items: flex-start;
   p {
     background-color: dodgerblue;

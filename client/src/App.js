@@ -14,7 +14,7 @@ import ThemeProvider from "./contexts/ThemeContext";
 import FloatingNavbar from "./components/FloatingNavbar";
 import Review from "./pages/Review";
 import SearchProvider from "./contexts/SearchContext";
-import ChatPage from "./pages/Chat";
+import ChatPage from "./pages/ChatPage";
 
 const App = () => {
   const { user } = useContext(AuthContext);
