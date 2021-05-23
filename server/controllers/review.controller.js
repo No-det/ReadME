@@ -224,7 +224,7 @@ exports.upvoteComment = (req, res) => {
 };
 
 exports.rateReview = (req, res) => {
-  Review.findOne({ _id: req.params.uid })
+  Review.findOne({ _id: req.body.id })
     .then(async (review) => {
       if (review) {
         review.ratings.push({ uid: req.uid, rate: req.body.rating });

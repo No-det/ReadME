@@ -13,5 +13,6 @@ router.get(
   checkAuth,
   reviewController.upvoteComment
 );
+router.post("/rate", checkAuth, reviewController.rateReview);
 
 module.exports = router;
