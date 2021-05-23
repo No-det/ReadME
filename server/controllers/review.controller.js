@@ -228,15 +228,21 @@ exports.rateReview = (req, res) => {
     .then(async (review) => {
       if (review) {
         review.ratings.push({ uid: req.uid, rate: req.body.rating });
-        let avgRating = 0,
-          ratings = review.ratings;
-        if (ratings.length > 0)
-          avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-        reviews.avgRating = avgRating.toFixed(1);
+        let ratings = review.ratings.map((rev) => rev.rate);
+        let avgRating = 0;
+        // ratings = review.ratings;
+        if (ratings.length > 0) {
+          avgRating = ratings.reduce((a, b) => a + b) / ratings.length;
+        }
+        review.avgRating = parseFloat(avgRating.toFixed(1));
         await review.save();
         return res
           .status(200)
-          .json({ success: true, message: "Rated the review successfully" });
+          .json({
+            success: true,
+            message: "Rated the review successfully",
+            average: review.avgRating,
+          });
       }
       return res
         .status(404)

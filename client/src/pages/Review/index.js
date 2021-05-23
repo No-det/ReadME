@@ -1,5 +1,5 @@
 import { message, Rate } from "antd";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DiscussionEmbed } from "disqus-react";
 
@@ -12,6 +12,7 @@ const Review = (props) => {
   const [review, setReview] = useState({});
   const [invalidRoute, setInvalidRoute] = useState(false);
   const [rating, setRating] = useState(1);
+  const [avgRating, setAvgRating] = useState(1);
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -20,6 +21,7 @@ const Review = (props) => {
           const data = await getReview(props?.match?.params?.id);
           console.log(data);
           setReview(data.review);
+          setAvgRating(data?.review?.avgRating || 0);
         } catch (err) {
           console.log(err);
           console.log(err.data.message);
@@ -37,9 +39,16 @@ const Review = (props) => {
     const params = { id: props?.match.params.id, rating: value };
     rateReview(params)
       .then((res) => {
-        if (res.success) message.success(res.message.toString());
+        if (res.success) {
+          message.success(res.message);
+          setRating(res.average);
+          setAvgRating(res.average);
+        }
       })
-      .catch((err) => message.error(err.toString()));
+      .catch((err) => {
+        console.log(err);
+        message.error(err.message);
+      });
   };
 
   return (
@@ -61,9 +70,14 @@ const Review = (props) => {
                 width="320"
               />
               <p>
-                <span>Rating</span>
-                <Rate defaultValue={4} onChange={rate} />
-                (4.5)
+                <span>Average Rating</span>
+                <Rate defaultValue={avgRating} value={avgRating} disabled />(
+                {avgRating})
+              </p>
+              <p>
+                <span>Your Rating</span>
+                <Rate defaultValue={rating} value={rating} onChange={rate} />(
+                {rating})
               </p>
             </div>
             <div className="reviewRightContainer">
