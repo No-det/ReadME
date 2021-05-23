@@ -222,3 +222,31 @@ exports.upvoteComment = (req, res) => {
       });
     });
 };
+
+exports.rateReview = (req, res) => {
+  Review.findOne({ _id: req.body.id })
+    .then(async (review) => {
+      if (review) {
+        review.ratings.push({ uid: req.uid, rate: req.body.rating });
+        let avgRating = 0,
+          ratings = review.ratings;
+        if (ratings.length > 0)
+          avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+        reviews.avgRating = avgRating.toFixed(1);
+        await review.save();
+        return res
+          .status(200)
+          .json({ success: true, message: "Rated the review successfully" });
+      }
+      return res
+        .status(404)
+        .json({ success: false, message: "Review not found." });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).json({
+        success: false,
+        message: "Some error occured. Please try again later.",
+      });
+    });
+};

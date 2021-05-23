@@ -16,7 +16,13 @@ const ReviewSchema = new Schema({
   yearOfPublication: { type: String, required: true },
   genre: { type: String, required: true },
   comments: [CommentSchema],
-  rating: { type: Number, required: true, default: 0 },
+  ratings: [
+    {
+      uid: { type: String, required: true },
+      rate: { type: Number, required: false },
+    },
+  ],
+  avgRating: { type: Number, required: true, default: 0 },
   createdAt: { type: Date, default: Date.now },
   upvotes: [{ type: String, required: false }],
 });

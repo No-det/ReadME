@@ -19,6 +19,7 @@ exports.addUser = (req, res) => {
           followers: [],
           following: [],
           reviews: [],
+          ratings: [],
           trades: [],
         };
         User.create(newUser)
