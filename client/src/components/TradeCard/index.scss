@@ -30,11 +30,11 @@
         padding-left: 10px;
       }
     }
-    button {
+    & > a {
+      padding: 10px 20px;
       background: #5b55c2;
       border-radius: 4px;
       height: 45px;
-      width: 115px;
       color: var(--textColor);
       font-weight: bold;
       font-size: 17px;

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 
 const TradeCard = ({
+  uid,
   displayName,
   photoURL,
   email,
@@ -19,7 +20,7 @@ const TradeCard = ({
             <a href={`mailto:${email}`}>{email}</a>
           </span>
         </div>
-        <button>Connect</button>
+        <Link to={`/chat/${uid}`}>Connect</Link>
       </div>
       <p className="body">{description}</p>
       <div className="foot">

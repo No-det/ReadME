@@ -96,6 +96,7 @@ const Trades = () => {
           <Masonry columnsCount={3} className="trades-posts">
             {trades?.map((trade, key) => (
               <TradeCard
+                uid={trade.uid}
                 displayName={trade.displayName}
                 email={trade.email}
                 description={trade.description}
