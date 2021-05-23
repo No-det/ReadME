@@ -12,7 +12,7 @@ const UserTile = ({ user, title, followers }) => {
         <div className="followEmail">{user?.email}</div>
       </div>
       <div className="followFollow">
-        {title !== "Following" &&
+        {title === "Following" &&
           (followers.filter((f) => f.uid === user?.uid).length > 0 ? (
             <button>Unfollow</button>
           ) : (

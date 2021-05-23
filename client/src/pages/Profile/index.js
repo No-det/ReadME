@@ -46,6 +46,7 @@ const Profile = (props) => {
 
         setFetchedData(true);
       } else {
+        setMyProfile(false);
         getUser(props?.match?.params?.id)
           .then((data) => {
             if (data.success) {
@@ -70,6 +71,8 @@ const Profile = (props) => {
       setProfileData(user);
       setFetchedData(true);
     }
+    setModalVisibility(false);
+    setModalData([]);
   }, [user, props]);
 
   const reviews = (uid) => {
