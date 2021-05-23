@@ -19,3 +19,7 @@ export const addComment = (id, payload) => {
 export const getProfileReviews = (uid) => {
   return get(`/review/profile/${uid}`);
 };
+
+export const rateReview = (payload) => {
+  return post(`/review/rate`, payload);
+};

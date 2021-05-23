@@ -18,27 +18,11 @@ const { TextArea } = Input;
 const Trades = () => {
   const [submitting, setSubmitting] = useState(false);
   const [drawerVisibility, setDrawerVisibility] = useState(false);
-  const [trades, setTrades] = useState([]);
+  // const [trades, setTrades] = useState([]);
 
   const { isDarkTheme } = useContext(ThemeContext);
-  const { user } = useContext(AuthContext);
+  const { user, trades } = useContext(AuthContext);
   const [form] = Form.useForm();
-
-  useEffect(() => {
-    const asyncFunction = async () => {
-      try {
-        const data = await getTrades();
-        console.log(data);
-        if (data.success) setTrades(data.trades);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-        message.error(error.response.data.message);
-      }
-    };
-
-    asyncFunction();
-  }, []);
 
   const handleFormChange = (value) => {
     form.setFieldsValue({

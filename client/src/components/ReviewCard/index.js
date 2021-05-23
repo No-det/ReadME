@@ -10,7 +10,14 @@ const ReviewCard = ({ review }) => {
           <p>{review.description.trim().slice(0, 100)}...</p>
         </div>
       </div>
-      <img src={review.coverImage} alt={review?.bookName} />
+      <img
+        onError={(e) =>
+          (e.target.src =
+            "https://mrb.imgix.net/assets/default-book.png?auto=format&ixlib=react-9.0.3&w=300")
+        }
+        src={review.coverImage}
+        alt={review?.bookName}
+      />
     </Link>
   );
 };

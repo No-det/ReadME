@@ -23,14 +23,24 @@
     img {
       height: 500px;
     }
+
+    p {
+      span {
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
   }
   .reviewRightContainer {
     padding: 0 50px;
     width: 100%;
+
     p {
       width: 100%;
       font-size: 22px;
       display: flex;
+
       & span:first-child {
         font-weight: 700;
         min-width: 250px;

@@ -16,6 +16,7 @@ import facebookIcon from "../../assets/facebook.svg";
 import defaultIcon from "../../assets/socialMedia.svg";
 import instagramIcon from "../../assets/instagram.svg";
 import UserTile from "../../components/UserTile";
+import { auth } from "../../firebase/firebase";
 
 const { TabPane } = Tabs;
 
@@ -98,6 +99,16 @@ const Profile = (props) => {
     else if (value.includes("instagram")) setConnectIcon(instagramIcon);
     else if (value.includes("whatsapp")) setConnectIcon(whatsappIcon);
     else setConnectIcon(defaultIcon);
+  };
+
+  const signOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        setUser(null);
+        message.success("Logout Successful!");
+      })
+      .catch((err) => message.error(err.toString()));
   };
 
   const handleUpdateProfile = async (data) => {
@@ -209,9 +220,14 @@ const Profile = (props) => {
                 <p>{profileData?.bio}</p>
               </span>
               {myProfile ? (
-                <Button size="large" onClick={() => setIsEditing(true)}>
-                  Edit Profile
-                </Button>
+                <div style={{ display: "flex" }}>
+                  <Button size="large" onClick={() => setIsEditing(true)}>
+                    Edit Profile
+                  </Button>
+                  <Button size="large" onClick={signOut}>
+                    Logout
+                  </Button>
+                </div>
               ) : (
                 <Button
                   size="large"

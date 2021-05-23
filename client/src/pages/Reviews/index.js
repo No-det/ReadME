@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Drawer, Input, Form, message } from "antd";
+import { Button, Drawer, Input, Form, message, Empty } from "antd";
 
 import ReviewCard from "../../components/ReviewCard";
 import Genre from "../../components/Genre";
@@ -17,26 +17,13 @@ import "./index.scss";
 const { TextArea } = Input;
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [form] = Form.useForm();
   const { searchResults, isSearching } = useContext(SearchContext);
 
-  const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    getReviews(user.uid)
-      .then((reviews) => {
-        setReviews(reviews.reviews);
-      })
-      .catch((err) => {
-        console.log(err);
-        message.error(
-          "Some error occured while fetching the latest reviews. Please try again later."
-        );
-      });
-  }, [user.uid]);
+  const { user, reviews } = useContext(AuthContext);
 
   const handleFormChange = (value) => {
     form.setFieldsValue({
@@ -68,31 +55,25 @@ const Reviews = () => {
     setSubmitting(false);
   };
 
+  const filteredSearch = reviews?.filter(
+    (review) =>
+      review.bookName.toLowerCase().includes(searchResults.toLowerCase()) ||
+      review.language.toLowerCase().includes(searchResults.toLowerCase()) ||
+      review.author.toLowerCase().includes(searchResults.toLowerCase())
+  );
+
   return (
     <div className="reviewsMain">
       <div className="reviewsCardContainer">
         <div className="reviewHead">
           <h3>Reviews</h3>
           <div className="cardCont">
-            {isSearching ? (
-              searchResults?.length > 0 ? (
-                searchResults?.map((search, key) => (
-                  <ReviewCard review={search} key={key} />
-                ))
-              ) : (
-                <div className="reviewLoading">
-                  <h3>No search results</h3>
-                </div>
-              )
-            ) : reviews?.length > 0 ? (
-              reviews?.map((review, key) => (
-                <ReviewCard review={review} key={key} />
+            {filteredSearch.length !== 0 ? (
+              filteredSearch.map((search, key) => (
+                <ReviewCard key={key} review={search} />
               ))
             ) : (
-              <div className="reviewLoading">
-                <h3>Crunching Latest Book Reviews</h3>
-                <div className="loader"></div>
-              </div>
+              <Empty description="Oops! Couldn't find any reviews." />
             )}
           </div>
         </div>

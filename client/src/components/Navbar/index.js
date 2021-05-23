@@ -18,7 +18,8 @@ const Navbar = ({ children }) => {
   const history = useHistory();
   const { user, reviews } = useContext(AuthContext);
   const [search, setSearch] = useState("");
-  const { setSearchResults, setIsSearching } = useContext(SearchContext);
+  const { setSearchResults, setIsSearching, searchResults } =
+    useContext(SearchContext);
   const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
 
   const [form] = Form.useForm();
@@ -39,24 +40,10 @@ const Navbar = ({ children }) => {
   };
 
   const onChange = ({ target }) => {
-    setSearch(target.value);
-    debounceSearch(target.value);
+    setSearchResults(target.value);
     if (!target.value) setIsSearching(false);
     else setIsSearching(true);
   };
-
-  const searchReviews = (value) => {
-    let newSearch = reviews?.filter((review) =>
-      review.bookName.toLowerCase().includes(value.toLowerCase())
-    );
-    setSearchResults(newSearch);
-    console.log(newSearch);
-  };
-
-  const debounceSearch = useCallback(
-    debounce((value) => searchReviews(value), 200),
-    []
-  );
 
   const toggleTheme = () => {
     if (document.body.className.includes("darkMode"))
@@ -74,29 +61,25 @@ const Navbar = ({ children }) => {
               <h2>readMe</h2>
             </div>
           </Link>
-          <div className="navToggleTheme">
+          <div className="navToggleTheme" style={{ display: "none" }}>
             <Switch defaultChecked onChange={toggleTheme} />
           </div>
         </span>
         {user ? (
-          <Form className="actionContainer">
-            <Form.Item name="genre">
-              <Genre handleFormChange={handleFormChange} />
-            </Form.Item>
-            <Form.Item name="search">
-              <Input
-                className="customInputSearch"
-                type="text"
-                placeholder="Search for a book"
-                onChange={onChange}
-                allowClear
-                value={search}
-              />
-            </Form.Item>
+          <div className="actionContainer">
+            <Genre handleFormChange={handleFormChange} />
+            <Input
+              className="customInputSearch"
+              type="text"
+              placeholder="Search for a book/author/language"
+              onChange={onChange}
+              allowClear
+              value={searchResults}
+            />
             <div className="searchBtn">
               <img src={Search} alt="search icon" />
             </div>
-          </Form>
+          </div>
         ) : (
           <div className="googleButton" onClick={signIn}>
             <img src={googleIcon} alt="G" />

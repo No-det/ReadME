@@ -1,9 +1,9 @@
-import { message } from "antd";
+import { message, Rate } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DiscussionEmbed } from "disqus-react";
 
-import { getReview } from "../../api/review";
+import { getReview, rateReview } from "../../api/review";
 import { genreMap } from "../../components/Genre/genremap";
 
 import "./index.scss";
@@ -11,6 +11,7 @@ import "./index.scss";
 const Review = (props) => {
   const [review, setReview] = useState({});
   const [invalidRoute, setInvalidRoute] = useState(false);
+  const [rating, setRating] = useState(1);
 
   useEffect(() => {
     const asyncFunction = async () => {
@@ -30,6 +31,17 @@ const Review = (props) => {
     asyncFunction();
   }, []);
 
+  const rate = (value) => {
+    setRating(value);
+
+    const params = { id: props?.match.params.id, rating: value };
+    rateReview(params)
+      .then((res) => {
+        if (res.success) message.success(res.message.toString());
+      })
+      .catch((err) => message.error(err.toString()));
+  };
+
   return (
     <div>
       {invalidRoute ? (
@@ -48,6 +60,11 @@ const Review = (props) => {
                 height="500"
                 width="320"
               />
+              <p>
+                <span>Rating</span>
+                <Rate defaultValue={4} onChange={rate} />
+                (4.5)
+              </p>
             </div>
             <div className="reviewRightContainer">
               <p>

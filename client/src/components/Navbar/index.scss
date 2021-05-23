@@ -10,7 +10,7 @@
   justify-content: space-between;
   padding: 0 20px;
   z-index: 999;
-  // background-color: var(--bgColor);
+  background-color: var(--bgColor);
   .navMainLogo {
     display: flex;
     align-items: center;
@@ -44,6 +44,7 @@
       .ant-select-selection-placeholder,
       .ant-select-selection-item {
         display: flex;
+        height: 44px;
         align-items: center;
         color: var(--bgColor);
         background-color: var(--textColor);

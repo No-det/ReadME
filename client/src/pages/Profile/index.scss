@@ -90,6 +90,7 @@
         color: var(--textColor);
         cursor: pointer;
         border: none;
+        margin-right: 15px;
 
         &:active {
           transition: all 0.3s ease-in-out;
