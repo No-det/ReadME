@@ -226,23 +226,28 @@ exports.upvoteComment = (req, res) => {
 exports.rateReview = (req, res) => {
   Review.findOne({ _id: req.body.id })
     .then(async (review) => {
-      if (review) {
-        review.ratings.push({ uid: req.uid, rate: req.body.rating });
-        let ratings = review.ratings.map((rev) => rev.rate);
-        let avgRating = 0;
-        // ratings = review.ratings;
-        if (ratings.length > 0) {
-          avgRating = ratings.reduce((a, b) => a + b) / ratings.length;
-        }
-        review.avgRating = parseFloat(avgRating.toFixed(1));
-        await review.save();
-        return res
-          .status(200)
-          .json({
+      let ratedUsers = review.ratings.map((rev) => rev.uid);
+      if (ratedUsers.includes(req.uid)) {
+        if (review) {
+          review.ratings.push({ uid: req.uid, rate: req.body.rating });
+          let ratings = review.ratings.map((rev) => rev.rate);
+          let avgRating = 0;
+          if (ratings.length > 0) {
+            avgRating = ratings.reduce((a, b) => a + b) / ratings.length;
+          }
+          review.avgRating = parseFloat(avgRating.toFixed(1));
+          await review.save();
+          return res.status(200).json({
             success: true,
             message: "Rated the review successfully",
             average: review.avgRating,
           });
+        }
+        return res.status(208).json({
+          success: false,
+          message: "You have already rated the review !",
+          average: review.avgRating,
+        });
       }
       return res
         .status(404)
