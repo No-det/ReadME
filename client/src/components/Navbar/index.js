@@ -64,8 +64,14 @@ const Navbar = ({ children }) => {
           <div className="navToggleTheme" style={{ display: "none" }}>
             <Switch defaultChecked onChange={toggleTheme} />
           </div>
+          {!user && (
+            <div className="googleButton" onClick={signIn}>
+              <img src={googleIcon} alt="G" />
+              Signin with Google
+            </div>
+          )}
         </span>
-        {user ? (
+        {user && (
           <div className="actionContainer">
             <Genre handleFormChange={handleFormChange} />
             <div className="inputSearchWrapper">
@@ -81,11 +87,6 @@ const Navbar = ({ children }) => {
                 <img src={Search} alt="search icon" />
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="googleButton" onClick={signIn}>
-            <img src={googleIcon} alt="G" />
-            Signin with Google
           </div>
         )}
       </div>
