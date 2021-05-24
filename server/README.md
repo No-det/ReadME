@@ -92,6 +92,7 @@
     ```
 
     **Returns the reviews of all whom are followed by the user**
+    <br />
 
 2.  ```http
     GET /api/v1/review/:id
@@ -101,6 +102,7 @@
     | PARAMETERS | TYPE | DESCRIPTION |
     | :--- | :--- | :--- |
     | `id`| `Query` | **Required.** Searches DB for matching id of review |
+    <br />
 
 <!-- ---
 
@@ -116,6 +118,7 @@
     | PARAMETERS | TYPE | DESCRIPTION |
     | :--- | :--- | :--- |
     | `postId`| `string` | **Required.** Adds the `postId` to the array of saved posts in the User model|
+    <br />
 
 <!-- ---
 
@@ -143,6 +146,8 @@
     | `yearOfPublication` | `string` | **Required.** |
     | `description`       | `string` | **Required.** |
 
+    <br />
+
 5.  ```http
     POST /api/v1/review/rate
     ```
@@ -152,6 +157,7 @@
     | :--- | :--- | :--- |
     | `reviewId` | `string` | **Required.** |
     | `rating` | `number` | **Required.** |
+    <br />
 
 #### REVIEW ROUTES
 
@@ -162,6 +168,7 @@
     ```
 
     **Returns the trades of all whom are followed by the user**
+    <br />
 
 2.  ```http
     POST /api/v1/trade/add
@@ -175,3 +182,5 @@
     | `bookName`    | `string` | **Required.** |
     | `genre`       | `string` | **Required.** |
     | `description` | `string` | **Required.** |
+
+    <br />
