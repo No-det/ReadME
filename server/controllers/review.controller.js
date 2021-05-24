@@ -40,7 +40,6 @@ exports.getReviews = async (req, res) => {
           user.following.map((followingUser) => {
             Review.find({ uid: followingUser.uid }).then((review) => {
               reviews.push(...review);
-              console.log(reviews);
             });
           });
           if (reviews.length < 20) {
@@ -237,6 +236,7 @@ exports.rateReview = (req, res) => {
           }
           review.avgRating = parseFloat(avgRating.toFixed(1));
           await review.save();
+          console.log(review.avgRating);
           return res.status(200).json({
             success: true,
             message: "Rated the review successfully",

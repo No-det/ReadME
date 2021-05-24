@@ -72,13 +72,19 @@
       width: 50%;
     }
   }
+}
 
-  @media screen and (max-width: 768px) {
-    .chatSelect {
+@media screen and (max-width: 768px) {
+  .chatPage {
+    display: flex;
+    flex-direction: column !important;
+    margin-bottom: 20vh;
+    .chatSelect,
+    .chatRoomWrapper {
       width: 100%;
     }
-    .chatRoomWrapper {
-      display: none;
+    .chatListWrapper {
+      height: 30vh !important;
     }
   }
 }
