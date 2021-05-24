@@ -20,8 +20,23 @@ const Reviews = () => {
   // const [reviews, setReviews] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [filteredSearch, setFilteredSearch] = useState("");
+
   const [form] = Form.useForm();
   const { searchResults, isSearching } = useContext(SearchContext);
+
+  useEffect(() => {
+    console.log(reviews);
+    const tempReviews = [];
+    reviews?.filter((review) => {
+      const temp =
+        review.bookName.toLowerCase().includes(searchResults.toLowerCase()) ||
+        review.language.toLowerCase().includes(searchResults.toLowerCase()) ||
+        review.author.toLowerCase().includes(searchResults.toLowerCase());
+      tempReviews.push(review);
+    });
+    setFilteredSearch(tempReviews);
+  }, [searchResults]);
 
   const { user, reviews } = useContext(AuthContext);
 
@@ -54,13 +69,6 @@ const Reviews = () => {
       });
     setSubmitting(false);
   };
-
-  const filteredSearch = reviews?.filter(
-    (review) =>
-      review.bookName.toLowerCase().includes(searchResults.toLowerCase()) ||
-      review.language.toLowerCase().includes(searchResults.toLowerCase()) ||
-      review.author.toLowerCase().includes(searchResults.toLowerCase())
-  );
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Form, Input, Switch } from "antd";
 
@@ -6,17 +6,18 @@ import Logo from "../../assets/logoME.svg";
 import Search from "../../assets/search.svg";
 import googleIcon from "../../assets/google.svg";
 
-import { AuthContext } from "../../contexts/AuthContext";
-import { signInWithGoogle } from "../../firebase/firebase";
-import "./index.scss";
-import debounce from "lodash/debounce";
-import { SearchContext } from "../../contexts/SearchContext";
 import Genre from "../Genre";
+import { signInWithGoogle } from "../../firebase/firebase";
+
+import { AuthContext } from "../../contexts/AuthContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { SearchContext } from "../../contexts/SearchContext";
+
+import "./index.scss";
 
 const Navbar = ({ children }) => {
   const history = useHistory();
-  const { user, reviews } = useContext(AuthContext);
+  const { user, reviews, allReviews, setReviews } = useContext(AuthContext);
   const [search, setSearch] = useState("");
   const { setSearchResults, setIsSearching, searchResults } =
     useContext(SearchContext);
@@ -37,6 +38,16 @@ const Navbar = ({ children }) => {
     form.setFieldsValue({
       genre: value,
     });
+    const tempReviews = [];
+    if (value === "all") {
+      setReviews(allReviews);
+    } else {
+      allReviews.map((review) => {
+        if (review.genre === value) tempReviews.push(review);
+      });
+      console.log(tempReviews);
+      setReviews(tempReviews);
+    }
   };
 
   const onChange = ({ target }) => {
@@ -73,7 +84,7 @@ const Navbar = ({ children }) => {
         </span>
         {user && (
           <div className="actionContainer">
-            <Genre handleFormChange={handleFormChange} />
+            <Genre handleFormChange={handleFormChange} isNav />
             <div className="inputSearchWrapper">
               <Input
                 className="customInputSearch"

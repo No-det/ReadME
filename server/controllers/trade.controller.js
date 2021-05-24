@@ -42,7 +42,7 @@ exports.getTrades = async (req, res) => {
               // .sort({ createdAt: -1 })
               .limit(20)
               .then((allTrades) => {
-                trades = [...trades, allTrades];
+                trades = [...trades, ...allTrades];
                 trades.filter((val, i) => trades.indexOf(val) === i);
                 return res.status(200).json({
                   success: true,

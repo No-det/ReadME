@@ -93,6 +93,13 @@ const ChatRoom = ({ receiver }) => {
   //     console.log("after update: ", chatHistory);
   //   });
   // }, []);
+
+  const handleSendMessage = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   return (
     <div className="chatRoom">
       <div className="cHead">
@@ -127,6 +134,7 @@ const ChatRoom = ({ receiver }) => {
           value={msgContent}
           onChange={(e) => setMsgContent(e.target.value)}
           placeholder="Enter your message..."
+          onKeyDown={handleSendMessage}
         />
         <img src={Search} onClick={sendMessage} alt="search" />
       </div>

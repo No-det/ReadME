@@ -13,6 +13,7 @@ const AuthProvider = (props) => {
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
+  const [allReviews, setAllReviews] = useState([]);
   const [trades, setTrades] = useState([]);
 
   useEffect(() => {
@@ -41,8 +42,10 @@ const AuthProvider = (props) => {
     getReviews()
       .then((res) => {
         console.log(res);
-        if (res.success) setReviews(res.reviews);
-        else message.error(res.message);
+        if (res.success) {
+          setReviews(res.reviews);
+          setAllReviews(res.reviews);
+        } else message.error(res.message);
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +66,9 @@ const AuthProvider = (props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, setUser, reviews, trades }}>
+    <AuthContext.Provider
+      value={{ user, token, setUser, reviews, allReviews, trades, setReviews }}
+    >
       {!loading && props.children}
     </AuthContext.Provider>
   );

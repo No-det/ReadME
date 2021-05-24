@@ -1,4 +1,5 @@
 export const genreMap = {
+  all: "All",
   fantasy: "Fantasy",
   science: "Science Fiction",
   dystopian: "Dystopian",
