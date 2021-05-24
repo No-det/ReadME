@@ -1,25 +1,49 @@
-import { Link } from "react-router-dom";
+import { message } from "antd";
+import { useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { follow } from "../../api/profile";
+import { AuthContext } from "../../contexts/AuthContext";
+
 import "./index.scss";
 
-const UserTile = ({ user, title, followers }) => {
+const UserTile = ({ user: userData, title, followers, match }) => {
+  const { user, setUser } = useContext(AuthContext);
+
+  const { id: paramId } = useParams();
+
+  const followUnfollow = (payload) => {
+    follow(payload)
+      .then((data) => {
+        console.log(data);
+        if (data.success) setUser(data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error(err.data.message);
+      });
+  };
+
   return (
-    <Link to={`/user/${user?.uid}`} className="followTile">
-      <div className="followImage">
-        <img src={user?.photoURL} alt={user?.name?.charAt(0)} />
-      </div>
-      <div className="followContent">
-        <div className="followName">{user?.name}</div>
-        <div className="followEmail">{user?.email}</div>
-      </div>
+    <div className="followTile">
+      <Link to={`/user/${userData?.uid}`} className="followImage">
+        <img src={userData?.photoURL} alt={userData?.name?.charAt(0)} />
+      </Link>
+      <Link to={`/user/${userData?.uid}`} className="followContent">
+        <div className="followName">{userData?.name}</div>
+        <div className="followEmail">{userData?.email}</div>
+      </Link>
       <div className="followFollow">
-        {title === "Following" &&
-          (followers.filter((f) => f.uid === user?.uid).length > 0 ? (
-            <button>Unfollow</button>
+        {paramId === user.uid &&
+          user.uid !== userData.uid &&
+          title === "Following" &&
+          (followers.filter((f) => f.uid === userData?.uid).length > 0 ? (
+            <button onClick={() => followUnfollow(userData)}>Unfollow</button>
           ) : (
-            <button>Follow</button>
+            <button onClick={() => followUnfollow(userData)}>Follow</button>
           ))}
       </div>
-    </Link>
+    </div>
   );
 };
 

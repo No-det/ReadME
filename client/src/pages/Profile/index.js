@@ -112,18 +112,16 @@ const Profile = (props) => {
   };
 
   const handleUpdateProfile = async (data) => {
-    if (data.displayName && data.bio && data.connect) {
+    console.log(data);
+    if (data.displayName || data.bio || data.connect) {
       setIsSubmitting(true);
-      const payload = {
-        displayName: data.displayName,
-        bio: data.bio,
-        connect: data.connect,
-      };
+      const payload = data;
       updateUser(payload)
         .then((data) => {
           console.log(data);
           if (data?.success) {
-            message.success(data.message);
+            setUser(data.user);
+            message.success("");
             form.resetFields();
           }
         })
@@ -134,7 +132,7 @@ const Profile = (props) => {
       setIsSubmitting(false);
       setIsEditing(false);
     } else {
-      message.error("Please fill out all the fields !");
+      message.error("Please fill out atleast one field!");
     }
   };
 
@@ -278,8 +276,13 @@ const Profile = (props) => {
             bio: profileData?.bio,
             connect: profileData?.connect,
           }}
+          requiredMark={false}
         >
-          <Form.Item label="Name" name="displayName">
+          <Form.Item
+            label="Name"
+            name="displayName"
+            rules={[{ required: true, message: "Display name is required" }]}
+          >
             <Input value={profileData?.displayName} />
           </Form.Item>
           <Form.Item label="Bio" name="bio">
@@ -287,7 +290,7 @@ const Profile = (props) => {
               value={profileData?.bio}
               showCount
               autoSize={{ minRows: 3, maxRows: 5 }}
-              maxLength={200}
+              maxLength={300}
             />
           </Form.Item>
           <Form.Item
