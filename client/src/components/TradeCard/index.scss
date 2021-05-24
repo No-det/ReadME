@@ -1,7 +1,7 @@
 .trade-post {
   padding: 30px;
   margin: 10px 0;
-  width: 440px;
+  max-width: 440px;
   height: fit-content;
   background: #2c3d55;
   color: var(--textColor);
@@ -51,6 +51,54 @@
       font-weight: bold;
       padding: 5px;
       color: var(--textColor);
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .trade-post {
+    .head {
+      .head-left {
+        img {
+          height: 40px;
+          width: 40px;
+        }
+        span {
+          h3 {
+            font-size: 20px;
+          }
+          a {
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .trade-post {
+    .head {
+      height: unset;
+      .head-left {
+        img {
+          height: 40px;
+          width: 40px;
+        }
+        span {
+          h3 {
+            font-size: 14px;
+          }
+          a {
+            font-size: 10px;
+          }
+        }
+      }
+
+      & > a {
+        padding: 7px 15px;
+        font-size: 12px;
+        height: unset;
+      }
     }
   }
 }

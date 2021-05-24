@@ -22,6 +22,7 @@
   .reviewLeftContainer {
     img {
       height: 500px;
+      object-fit: cover;
     }
 
     p {
@@ -91,6 +92,30 @@
   display: none;
 }
 
+@media screen and (max-width: 1000px) {
+  .reviewContainer {
+    flex-direction: column;
+    align-items: center;
+
+    .reviewLeftContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        height: 300px;
+        width: 200px;
+      }
+    }
+    .reviewRightContainer {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: unset;
+    }
+  }
+}
+
 @media screen and (max-width: 903px) {
   #disqus_thread:before {
     top: 220px;
@@ -100,6 +125,20 @@
 @media screen and (max-width: 768px) {
   #disqus_thread:before {
     top: 140px;
+  }
+  .reviewContainer {
+    .reviewRightContainer {
+      p {
+        flex-direction: column;
+        span:first-child::after {
+          content: " :";
+        }
+        span:last-child {
+          overflow: hidden;
+          text-indent: -10px;
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 724px) {

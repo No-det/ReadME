@@ -32,3 +32,12 @@
       inset -2.4px -2.4px 9.6px var(--boxShadowInset2);
   }
 }
+
+@media screen and (max-width: 500px) {
+  .floatingNavbarContainer {
+    width: 90%;
+    .navLink {
+      font-size: 12px;
+    }
+  }
+}

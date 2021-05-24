@@ -64,7 +64,7 @@ const Trades = () => {
         <div className="posterHead">
           <div className="addResBtn" onClick={() => setDrawerVisibility(true)}>
             <img className="salt" src={PlusIcon} alt="plusIcon" />
-            Add Trade
+            <span>Add Trade</span>
           </div>
         </div>
       </div>

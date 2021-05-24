@@ -4,11 +4,11 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  height: 10vh;
+  min-height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 20px;
   z-index: 999;
   background-color: var(--bgColor);
   .navMainLogo {
@@ -29,6 +29,13 @@
     .ant-select {
       height: 100%;
       background-color: (--bgColor);
+    }
+
+    .inputSearchWrapper {
+      display: flex;
+      div {
+        flex: 1;
+      }
     }
 
     .ant-select-selector {
@@ -117,4 +124,37 @@
 
 .navContent {
   padding-top: 12vh;
+}
+
+@media screen and (max-width: 768px) {
+  .navMain {
+    flex-direction: column;
+    align-items: unset;
+
+    .actionContainer {
+      flex-direction: column;
+      align-items: unset;
+      div {
+        margin: 10px 0 0 0;
+      }
+      .ant-select {
+        height: unset;
+      }
+      .ant-select-selector {
+        height: unset !important;
+      }
+      .customInputSearch {
+        margin: 0 10px 0 0;
+        flex: 3 1;
+      }
+      .searchBtn {
+        padding: 10px 20px;
+        margin: 0;
+        flex: 1 3;
+      }
+    }
+  }
+  .navContent {
+    padding-top: 23vh;
+  }
 }

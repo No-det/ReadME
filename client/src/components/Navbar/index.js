@@ -68,16 +68,18 @@ const Navbar = ({ children }) => {
         {user ? (
           <div className="actionContainer">
             <Genre handleFormChange={handleFormChange} />
-            <Input
-              className="customInputSearch"
-              type="text"
-              placeholder="Search for a book/author/language"
-              onChange={onChange}
-              allowClear
-              value={searchResults}
-            />
-            <div className="searchBtn">
-              <img src={Search} alt="search icon" />
+            <div className="inputSearchWrapper">
+              <Input
+                className="customInputSearch"
+                type="text"
+                placeholder="Search for a book/author/language"
+                onChange={onChange}
+                allowClear
+                value={searchResults}
+              />
+              <div className="searchBtn">
+                <img src={Search} alt="search icon" />
+              </div>
             </div>
           </div>
         ) : (

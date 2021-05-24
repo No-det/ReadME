@@ -14,9 +14,8 @@
       width: 100%;
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 40px;
       .addResBtn {
-        width: 200px;
+        padding: 10px 20px;
         height: 44px;
         border-radius: 4px;
         box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
@@ -39,6 +38,23 @@
           transition: all 0.3s ease-in-out;
           box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
             inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .trades {
+    .trades-head {
+      .posterHead {
+        .addResBtn {
+          img {
+            margin: 0;
+          }
+          span {
+            display: none;
+          }
         }
       }
     }

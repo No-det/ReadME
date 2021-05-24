@@ -7,17 +7,6 @@
   .reviewsCardContainer {
     flex: 0.7;
 
-    .reviewHead {
-      width: 100%;
-      h3 {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 36px;
-        line-height: 43px;
-        color: var(--textColor);
-      }
-    }
-
     .cardCont {
       overflow-y: scroll;
       &::-webkit-scrollbar {
@@ -28,7 +17,6 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      margin-top: 30px;
     }
   }
 
@@ -48,6 +36,7 @@
       display: flex;
       padding: 0 30px;
       padding-top: 25%;
+      margin-top: 20px;
 
       .content {
         h2 {
@@ -92,32 +81,43 @@
       display: flex;
       justify-content: flex-end;
       margin-bottom: 40px;
-      .addResBtn {
-        width: 200px;
-        height: 44px;
-        border-radius: 4px;
-        box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
-          -2.4px -2.4px 9.6px var(--boxShadowInset2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 22px;
-        color: var(--textColor);
-        cursor: pointer;
+    }
+  }
+}
+.reviewTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 43px;
+    color: var(--textColor);
+  }
+  .addResBtn {
+    height: 44px;
+    border-radius: 4px;
+    box-shadow: 4.8px 4.8px 9.6px var(--boxShadowInset1),
+      -2.4px -2.4px 9.6px var(--boxShadowInset2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--textColor);
+    cursor: pointer;
+    padding: 10px 20px;
 
-        img {
-          margin-right: 5px;
-        }
+    img {
+      margin-right: 5px;
+    }
 
-        &:active {
-          transition: all 0.3s ease-in-out;
-          box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
-            inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
-        }
-      }
+    &:active {
+      transition: all 0.3s ease-in-out;
+      box-shadow: inset 4.8px 4.8px 9.6px var(--boxShadowInset1),
+        inset -4.8px -4.8px 9.6px var(--boxShadowInset2);
     }
   }
 }
@@ -155,5 +155,31 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .reviewsMain {
+    padding: 0;
+
+    .reviewsCardContainer {
+      flex: 1 1;
+    }
+
+    .posterContainer {
+      display: none;
+    }
+  }
+
+  .reviewTop {
+    .addResBtn {
+      font-size: 14px;
+      .salt {
+        margin: 0;
+      }
+      span {
+        display: none;
+      }
+    }
   }
 }

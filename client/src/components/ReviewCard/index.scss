@@ -66,3 +66,16 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .reviewCardMain {
+    width: 100%;
+
+    .text {
+      .heading {
+        font-size: 24px;
+        line-height: unset;
+      }
+    }
+  }
+}

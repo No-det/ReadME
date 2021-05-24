@@ -220,7 +220,7 @@ const Profile = (props) => {
                 <p>{profileData?.bio}</p>
               </span>
               {myProfile ? (
-                <div style={{ display: "flex" }}>
+                <div className="editLogout">
                   <Button size="large" onClick={() => setIsEditing(true)}>
                     Edit Profile
                   </Button>
