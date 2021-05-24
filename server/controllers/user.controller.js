@@ -92,9 +92,12 @@ exports.followUser = async (req, res) => {
 
       if (filteredUser.length === following.length) {
         finalUsers = [...following, req.body];
-        finalChats = [...chats, req.body];
       } else {
         finalUsers = filteredUser;
+      }
+      if (chats.filter((chat) => chat.uid === uid).length === 0) {
+        finalChats = [...chats, req.body];
+      } else {
         finalChats = chats;
       }
 
