@@ -1,6 +1,6 @@
 ## Resource Listing Server
 
-<p>Code for server hosted at <a href="https://localhost:5000" target="_blank">https://resource-listing.azurewebsites.net</a> using <a href="https://azure.microsoft.com/" target="_blank">Azure</a> built with <a href="https://expressjs.com/" target="_blank">ExpressJS Framework</a> on <a href="https://nodejs.org/en/" target="_blank">NodeJS<a/></p>
+<p>Code for server hosted at <a href="https://readmebfh.herokuapp.com/" target="_blank">https://resource-listing.azurewebsites.net</a> using <a href="https://www.heroku.com/" target="_blank">Heroku</a> built with <a href="https://expressjs.com/" target="_blank">ExpressJS Framework</a> on <a href="https://nodejs.org/en/" target="_blank">NodeJS<a/></p>
 
 <p>Server for <a href="https://resourcelisting.netlify.app" target="_blank">readMe</a>, A great eye for good books </p>
 
@@ -91,7 +91,8 @@
     GET /api/v1/review/getall
     ```
 
-    **Returns all the reviews**
+    **Returns the reviews of all whom are followed by the user**
+    <br />
 
 2.  ```http
     GET /api/v1/review/:id
@@ -101,12 +102,13 @@
     | PARAMETERS | TYPE | DESCRIPTION |
     | :--- | :--- | :--- |
     | `id`| `Query` | **Required.** Searches DB for matching id of review |
+    <br />
+
+<!-- ---
 
 ---
 
----
-
----
+--- -->
 
 3.  ```http
     GET /api/v1/review/upvoteReview/:id
@@ -116,12 +118,13 @@
     | PARAMETERS | TYPE | DESCRIPTION |
     | :--- | :--- | :--- |
     | `postId`| `string` | **Required.** Adds the `postId` to the array of saved posts in the User model|
+    <br />
+
+<!-- ---
 
 ---
 
----
-
----
+--- -->
 
 4.  ```http
     POST /api/v1/review/add
@@ -142,3 +145,42 @@
     | `linkToPurchase`    | `string` | **Required.** |
     | `yearOfPublication` | `string` | **Required.** |
     | `description`       | `string` | **Required.** |
+
+    <br />
+
+5.  ```http
+    POST /api/v1/review/rate
+    ```
+
+    **Returns the updated post as response**
+    | PARAMETERS | TYPE | DESCRIPTION |
+    | :--- | :--- | :--- |
+    | `reviewId` | `string` | **Required.** |
+    | `rating` | `number` | **Required.** |
+    <br />
+
+#### REVIEW ROUTES
+
+**All the routes require `Authorization` sent as Header with the `request`**
+
+1.  ```http
+    GET /api/v1/trade/getall
+    ```
+
+    **Returns the trades of all whom are followed by the user**
+    <br />
+
+2.  ```http
+    POST /api/v1/trade/add
+    ```
+
+    **Returns a message if the review was added successfully**
+
+    | PARAMETERS    | TYPE     | DESCRIPTION   |
+    | :------------ | :------- | :------------ |
+    | `uid`         | `string` | **Required.** |
+    | `bookName`    | `string` | **Required.** |
+    | `genre`       | `string` | **Required.** |
+    | `description` | `string` | **Required.** |
+
+    <br />
