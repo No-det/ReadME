@@ -2,7 +2,7 @@
 
 # readMe
 
-Long Description about project. This project do that. This project is awesome...
+readMe is an book review website where users can add reviews, trade books and connect with other book readers. Users can log in to the webapp using their google account. If a user likes a review, he can give a rating for the book, and give their thoughts on comment section.
 
 ## Team members
 
