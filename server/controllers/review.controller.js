@@ -227,7 +227,7 @@ exports.rateReview = (req, res) => {
     .then(async (review) => {
       if (review) {
         let ratedUsers = review.ratings.map((rev) => rev.uid);
-        if (ratedUsers.includes(req.uid)) {
+        if (!ratedUsers.includes(req.uid)) {
           review.ratings.push({ uid: req.uid, rate: req.body.rating });
           let ratings = review.ratings.map((rev) => rev.rate);
           let avgRating = 0;
