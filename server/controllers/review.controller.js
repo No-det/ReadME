@@ -226,9 +226,9 @@ exports.upvoteComment = (req, res) => {
 exports.rateReview = (req, res) => {
   Review.findOne({ _id: req.body.id })
     .then(async (review) => {
-      let ratedUsers = review.ratings.map((rev) => rev.uid);
-      if (ratedUsers.includes(req.uid)) {
-        if (review) {
+      if (review) {
+        let ratedUsers = review.ratings.map((rev) => rev.uid);
+        if (ratedUsers.includes(req.uid)) {
           review.ratings.push({ uid: req.uid, rate: req.body.rating });
           let ratings = review.ratings.map((rev) => rev.rate);
           let avgRating = 0;
