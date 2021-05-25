@@ -20,7 +20,7 @@ BFH/recslkAeuehVHoDvy/2021
 
 ## Link to product walkthrough
 
-[Youtube](https://youtu.be/PdfvOjLmC68)
+[Youtube](https://youtu.be/YYwO8wH-VU8)
 
 ## How it Works ?
 
