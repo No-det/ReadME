@@ -241,6 +241,7 @@ exports.updateUserChat = (req, res) => {
       if (user) {
         const userDetails = {
           uid: user.uid,
+          email: user.email,
           photoURL: user.photoURL,
           name: user.displayName,
         };

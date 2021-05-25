@@ -55,7 +55,6 @@ const Reviews = () => {
       email: user?.email,
       ...values,
     };
-    console.log(payload);
     addReviewPost(payload)
       .then((data) => {
         console.log(data);
@@ -63,11 +62,12 @@ const Reviews = () => {
           message.success(data.message);
           form.resetFields();
         }
+        setSubmitting(false);
       })
       .catch((err) => {
         console.log(err);
+        setSubmitting(false);
       });
-    setSubmitting(false);
   };
 
   return (

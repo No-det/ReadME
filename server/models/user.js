@@ -35,7 +35,7 @@ const UserSchema = new Schema({
     {
       uid: { type: String, required: true },
       name: { type: String, required: true },
-      email: { type: String, required: true },
+      email: { type: String, required: false },
       photoURL: { type: String, required: true },
     },
   ],
