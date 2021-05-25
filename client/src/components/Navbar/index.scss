@@ -158,3 +158,16 @@
     padding-top: 25vh;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .navMain {
+    .googleButton {
+      img {
+        padding: 0;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+}

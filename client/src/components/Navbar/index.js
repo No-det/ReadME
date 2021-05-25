@@ -76,7 +76,7 @@ const Navbar = ({ children }) => {
           {!user && (
             <div className="googleButton" onClick={signIn}>
               <img src={googleIcon} alt="G" />
-              Signin with Google
+              <span>Signin with Google</span>
             </div>
           )}
         </span>

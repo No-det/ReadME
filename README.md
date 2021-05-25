@@ -4,6 +4,8 @@
 
 readMe is an book review website where users can add reviews, trade books and connect with other book readers. Users can log in to the webapp using their google account. If a user likes a review, he can give a rating for the book, and give their thoughts on comment section.
 
+This is a PWA, which means you can install it in your mobile/desktop!
+
 ## Team members
 
 1. Nandanunni AS [Github](https://github.com/nandan-unni)
@@ -18,16 +20,27 @@ BFH/recslkAeuehVHoDvy/2021
 
 ## Link to product walkthrough
 
-[link to video]
+[Youtube](https://youtu.be/PdfvOjLmC68)
 
 ## How it Works ?
 
-1. Explaining the working of project
-2. Embed video of project demo
+1. Project made using MERN Stack and Firebase for authentication
 
-## Libraries used
+## Dependencies used
 
-Library Name - Version
+- Server
+
+  - express - 4.17.1
+  - firebase-admin - 9.8.0
+  - mongoose - 5.12.9
+
+- Client
+  - react - 17.0.2
+  - node-sass - 6.0.0
+  - firebase - 8.6.1
+  - axios - 0.21.1
+  - antd - 4.15.5
+  - react-router-dom - 5.2.0
 
 ## How to configure
 

@@ -3,20 +3,25 @@
   "name": "readMe - A great eye for good books",
   "icons": [
     {
-      "src": "logoME.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/svg+xml"
+      "src": "maskable_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "logoME.svg",
-      "type": "image/svg+xml",
+      "src": "logoME.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "logoME.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logoME.svg",
-      "type": "image/svg+xml",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "src": "logoME.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",

@@ -1,11 +1,11 @@
-## Resource Listing Server
+## readMe
 
-<p>Code for server hosted at <a href="https://readmebfh.herokuapp.com/" target="_blank">https://resource-listing.azurewebsites.net</a> using <a href="https://www.heroku.com/" target="_blank">Heroku</a> built with <a href="https://expressjs.com/" target="_blank">ExpressJS Framework</a> on <a href="https://nodejs.org/en/" target="_blank">NodeJS<a/></p>
+<p>Code for server hosted at <a href="https://readmebfh.herokuapp.com/" target="_blank">https://readmebfh.herokuapp.com/</a> using <a href="https://www.heroku.com/" target="_blank">Heroku</a> built with <a href="https://expressjs.com/" target="_blank">ExpressJS Framework</a> on <a href="https://nodejs.org/en/" target="_blank">NodeJS<a/></p>
 
-<p>Server for <a href="https://resourcelisting.netlify.app" target="_blank">readMe</a>, A great eye for good books </p>
+<p>Server for <a href="https://readmebfh.netlify.app" target="_blank">readMe</a> - A great eye for good books </p>
 
 <p><a href="https://github.com/No-det/ReadME/tree/main/client" target="_blank" >Code for Client</a></p>
-<p><a href="https://localhost:3000" target="_blank">Client</a></p>
+<p><a href="https://readmebfh.netlify.com/" target="_blank">Client</a></p>
    
 ## 📦 Routes
 
@@ -73,7 +73,7 @@
     POST /api/v1/user/follow
     ```
 
-    **Route for Email Login On success returns the `token` as url parameter to client else redirects back to email signin**
+    **Route to follow/unfollow other users**
     | PARAMETERS | TYPE | DESCRIPTION |
     | :--- | :--- | :--- |
     | `uid` | `string` | **Required.** |
@@ -104,29 +104,7 @@
     | `id`| `Query` | **Required.** Searches DB for matching id of review |
     <br />
 
-<!-- ---
-
----
-
---- -->
-
 3.  ```http
-    GET /api/v1/review/upvoteReview/:id
-    ```
-
-    **Returns the updated post as response**
-    | PARAMETERS | TYPE | DESCRIPTION |
-    | :--- | :--- | :--- |
-    | `postId`| `string` | **Required.** Adds the `postId` to the array of saved posts in the User model|
-    <br />
-
-<!-- ---
-
----
-
---- -->
-
-4.  ```http
     POST /api/v1/review/add
     ```
 
@@ -148,7 +126,7 @@
 
     <br />
 
-5.  ```http
+4.  ```http
     POST /api/v1/review/rate
     ```
 
@@ -159,7 +137,7 @@
     | `rating` | `number` | **Required.** |
     <br />
 
-#### REVIEW ROUTES
+#### TRADE ROUTES
 
 **All the routes require `Authorization` sent as Header with the `request`**
 
@@ -174,7 +152,7 @@
     POST /api/v1/trade/add
     ```
 
-    **Returns a message if the review was added successfully**
+    **Returns a message if the trade was added successfully**
 
     | PARAMETERS    | TYPE     | DESCRIPTION   |
     | :------------ | :------- | :------------ |
