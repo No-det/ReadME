@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 import "./index.scss";
 import defaultDp from "../../assets/defaultDP.png";
 

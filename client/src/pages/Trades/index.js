@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Drawer, Input, Form, Button, message } from "antd";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
@@ -8,7 +8,7 @@ import Genre from "../../components/Genre";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
-import { getTrades, addTradePost } from "../../api/trade";
+import { addTradePost } from "../../api/trade";
 
 import PlusIcon from "../../assets/plus.svg";
 import "./index.scss";

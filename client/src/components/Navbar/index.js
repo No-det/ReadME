@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable array-callback-return */
+import { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Form, Input, Switch } from "antd";
 
@@ -10,18 +11,15 @@ import Genre from "../Genre";
 import { signInWithGoogle } from "../../firebase/firebase";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import { ThemeContext } from "../../contexts/ThemeContext";
 import { SearchContext } from "../../contexts/SearchContext";
 
 import "./index.scss";
 
 const Navbar = ({ children }) => {
   const history = useHistory();
-  const { user, reviews, allReviews, setReviews } = useContext(AuthContext);
-  const [search, setSearch] = useState("");
+  const { user, allReviews, setReviews } = useContext(AuthContext);
   const { setSearchResults, setIsSearching, searchResults } =
     useContext(SearchContext);
-  const { isDarkTheme, setIsDarkTheme } = useContext(ThemeContext);
 
   const [form] = Form.useForm();
 

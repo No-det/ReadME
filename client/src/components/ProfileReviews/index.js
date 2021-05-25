@@ -3,7 +3,6 @@ import ReviewCard from "../ReviewCard";
 import "./index.scss";
 
 const ProfileReviews = ({ reviews }) => {
-  console.log(reviews);
   return (
     <div className="profileWrapper">
       {reviews?.length > 0 ? (

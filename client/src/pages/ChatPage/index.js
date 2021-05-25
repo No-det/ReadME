@@ -10,7 +10,7 @@ import ChatTile from "./ChatTile";
 import Search from "../../assets/search.svg";
 
 import "./index.scss";
-import { getUser, updateChatMembers } from "../../api/auth";
+import { updateChatMembers } from "../../api/auth";
 
 const ChatPage = (props) => {
   const { user, setUser } = useContext(AuthContext);
@@ -20,7 +20,6 @@ const ChatPage = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(props);
     if (props?.match?.params?.uid) {
       updateChatMembers(props?.match?.params?.uid)
         .then((data) => {
@@ -39,6 +38,7 @@ const ChatPage = (props) => {
           history.push("/chat");
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props?.match?.params?.uid]);
 
   return (

@@ -41,7 +41,6 @@ const AuthProvider = (props) => {
   const getAllReviews = () => {
     getReviews()
       .then((res) => {
-        console.log(res);
         if (res.success) {
           setReviews(res.reviews);
           setAllReviews(res.reviews);
@@ -56,9 +55,7 @@ const AuthProvider = (props) => {
   const getAllTrades = async () => {
     try {
       const data = await getTrades();
-      console.log(data);
       if (data.success) setTrades(data.trades.reverse());
-      console.log(data);
     } catch (error) {
       console.log(error);
       message.error(error.response.data.message);

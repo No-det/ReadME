@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 
 import PrivateRoute from "./routes/PrivateRoute";
@@ -9,7 +8,7 @@ import Reviews from "./pages/Reviews";
 import Landing from "./pages/Landing";
 import Trades from "./pages/Trades";
 import Profile from "./pages/Profile";
-import AuthProvider, { AuthContext } from "./contexts/AuthContext";
+import AuthProvider from "./contexts/AuthContext";
 import ThemeProvider from "./contexts/ThemeContext";
 import FloatingNavbar from "./components/FloatingNavbar";
 import Review from "./pages/Review";
@@ -18,10 +17,6 @@ import ChatPage from "./pages/ChatPage";
 import WhoToFollow from "./pages/WhoToFollow";
 
 const App = () => {
-  const { user } = useContext(AuthContext);
-
-  console.log(user);
-
   return (
     <AuthProvider>
       <ThemeProvider>

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Drawer, Input, Form, message, Empty } from "antd";
@@ -5,7 +6,7 @@ import { Button, Drawer, Input, Form, message, Empty } from "antd";
 import ReviewCard from "../../components/ReviewCard";
 import Genre from "../../components/Genre";
 
-import { addReviewPost, getReviews } from "../../api/review";
+import { addReviewPost } from "../../api/review";
 import { SearchContext } from "../../contexts/SearchContext";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -23,18 +24,18 @@ const Reviews = () => {
   const [filteredSearch, setFilteredSearch] = useState("");
 
   const [form] = Form.useForm();
-  const { searchResults, isSearching } = useContext(SearchContext);
+  const { searchResults } = useContext(SearchContext);
   const { user, reviews } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(reviews);
     const tempReviews = [];
     reviews?.filter((review) => {
       const temp =
         review.bookName.toLowerCase().includes(searchResults.toLowerCase()) ||
         review.language.toLowerCase().includes(searchResults.toLowerCase()) ||
-        review.author.toLowerCase().includes(searchResults.toLowerCase());
-      tempReviews.push(review);
+        review.author.toLowerCase().includes(searchResults.toLowerCase()) ||
+        review.displayName.toLowerCase().includes(searchResults.toLowerCase());
+      if (temp) tempReviews.push(review);
     });
     setFilteredSearch(tempReviews);
   }, [searchResults, reviews]);

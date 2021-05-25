@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import "./index.scss";
 
-const UserTile = ({ user: userData, title, followers, match }) => {
+const UserTile = ({ user: userData, title, followers, following }) => {
   const { user, setUser } = useContext(AuthContext);
 
   const { id: paramId } = useParams();
@@ -35,9 +35,9 @@ const UserTile = ({ user: userData, title, followers, match }) => {
       </Link>
       <div className="followFollow">
         {paramId === user.uid &&
-          user.uid !== userData.uid &&
-          title === "Following" &&
-          (followers.filter((f) => f.uid === userData?.uid).length > 0 ? (
+          (user.uid !== userData.uid && title === "Following" ? (
+            <button onClick={() => followUnfollow(userData)}>Unfollow</button>
+          ) : followers.filter((f) => f.uid === userData?.uid).length > 0 ? (
             <button onClick={() => followUnfollow(userData)}>Unfollow</button>
           ) : (
             <button onClick={() => followUnfollow(userData)}>Follow</button>

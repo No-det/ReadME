@@ -43,8 +43,6 @@ const Profile = (props) => {
         setMyProfile(true);
         reviews(user.uid);
         setProfileData(user);
-        console.log(user);
-
         setFetchedData(true);
       } else {
         setMyProfile(false);
@@ -82,7 +80,6 @@ const Profile = (props) => {
         if (data.success) {
           setProfileReviews(data.reviews);
           setProfileTrades(data.trades);
-          console.log(data);
         }
       })
       .catch((err) => {
@@ -326,6 +323,7 @@ const Profile = (props) => {
       >
         {modalData?.map((data) => (
           <UserTile
+            following={profileData.following}
             followers={profileData.followers}
             title={modalTitle}
             user={data}
