@@ -24,6 +24,7 @@ const Reviews = () => {
 
   const [form] = Form.useForm();
   const { searchResults, isSearching } = useContext(SearchContext);
+  const { user, reviews } = useContext(AuthContext);
 
   useEffect(() => {
     console.log(reviews);
@@ -36,9 +37,7 @@ const Reviews = () => {
       tempReviews.push(review);
     });
     setFilteredSearch(tempReviews);
-  }, [searchResults]);
-
-  const { user, reviews } = useContext(AuthContext);
+  }, [searchResults, reviews]);
 
   const handleFormChange = (value) => {
     form.setFieldsValue({
