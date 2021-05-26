@@ -24,7 +24,11 @@ BFH/recslkAeuehVHoDvy/2021
 
 ## How it Works ?
 
-1. Project made using MERN Stack and Firebase for authentication
+1. Create an account at [readMe](https://readmebfh.netlify.app) using google authentication
+2. You can add new review, read review and rate review in review section
+3. You can add trade, connect with other users in the trade section
+4. You can chat with your followers, people you are following, people who want to trade with you and people who you want to trade with in the chat section
+5. Profile page where you can update you profile and view the trades and reviews posted
 
 ## Dependencies used
 
@@ -59,8 +63,12 @@ BFH/recslkAeuehVHoDvy/2021
      ```sh
      npm install
      ```
+   - Environment variable required
+     ```sh
+     REACT_APP_API_BASE_URL = http://localhost:5000/api/v1
+     ```
 3. Server side setup
-   - Go inside the client directory
+   - Go inside the server directory
      ```sh
      cd readMe/server
      ```
@@ -68,14 +76,18 @@ BFH/recslkAeuehVHoDvy/2021
      ```sh
      npm install
      ```
-
+   - Environment variable required
+     ```sh
+     MONGO_URI = URI_TO_MONGODB_DB
+     SERVICE_ACCOUNT_KEY = SERVICE_ACCOUNT_KEY_FROM_FIREBASE
+     ```
 ## How to Run
 
 Instructions for running
 
 1. Client
 
-   - Start the development server
+   - Start the development server 
      ```sh
      cd client && npm start
      ```
